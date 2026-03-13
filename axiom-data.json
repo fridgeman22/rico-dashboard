@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-13T12:33:51.837Z",
+  "updated": "2026-03-13T19:32:25.123Z",
   "stats": {
     "totalPredictions": 6,
     "resolvedMarkets": 4,
@@ -7,7 +7,7 @@
     "unclaimedMarkets": 0,
     "unclaimedPayoutUsd": "0.00",
     "unclaimedPnlUsd": "0.00",
-    "leaderboardRank": 73,
+    "leaderboardRank": 74,
     "pnlUsd": 0.8657160009337851,
     "pnlPercent": 17.85701673937285,
     "volumeUsd": 4.848043845,
@@ -93,5 +93,9 @@
       "instanceDate": "2026-03-11",
       "category": "daily"
     }
-  ]
+  ],
+  "bot": {
+    "lastLog": null,
+    "error": "ENOENT: no such file or directory, open '/home/agent/workspace/trading/rico-state.json'"
+  }
 }

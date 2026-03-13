@@ -1,0 +1,97 @@
+{
+  "updated": "2026-03-13T12:07:37.180Z",
+  "stats": {
+    "totalPredictions": 6,
+    "resolvedMarkets": 4,
+    "openMarkets": 2,
+    "unclaimedMarkets": 0,
+    "unclaimedPayoutUsd": "0.00",
+    "unclaimedPnlUsd": "0.00",
+    "leaderboardRank": 73,
+    "pnlUsd": 0.8657160009337851,
+    "pnlPercent": 17.85701673937285,
+    "volumeUsd": 4.848043845,
+    "winRate": 75,
+    "tradeCount": 4
+  },
+  "bets": [
+    {
+      "marketId": "eth-price-prediction",
+      "marketAddress": "0x87b44Dcf22FD432e3EdEa39ac90B8760F4271469",
+      "title": "Ethereum Higher or Lower than $2,073.690 on March 13, 2026?",
+      "status": "open",
+      "outcomeIndex": 0,
+      "outcomeLabel": "Higher",
+      "amountUsd": "1.40568275",
+      "shares": "2.577492",
+      "createdAt": "2026-03-13T00:53:38.080Z",
+      "instanceDate": "2026-03-13",
+      "category": "daily"
+    },
+    {
+      "marketId": "btc-price-prediction",
+      "marketAddress": "0x0e495489ddA506fF63dF314054AB4b1f99D0E84d",
+      "title": "Bitcoin Higher or Lower than $70,537.02 on March 13, 2026?",
+      "status": "open",
+      "outcomeIndex": 0,
+      "outcomeLabel": "Higher",
+      "amountUsd": "1.40568275",
+      "shares": "2.609449",
+      "createdAt": "2026-03-13T00:53:18.076Z",
+      "instanceDate": "2026-03-13",
+      "category": "daily"
+    },
+    {
+      "marketId": "eth-price-prediction",
+      "marketAddress": "0xab2c4Bf1Ab3174f7932074281754331001281592",
+      "title": "Ethereum Higher or Lower than $2,052.226 on March 12, 2026?",
+      "status": "won",
+      "outcomeIndex": 0,
+      "outcomeLabel": "Higher",
+      "amountUsd": "1.0353448425",
+      "shares": "1.598038",
+      "createdAt": "2026-03-12T13:47:38.083Z",
+      "instanceDate": "2026-03-12",
+      "category": "daily"
+    },
+    {
+      "marketId": "btc-price-prediction",
+      "marketAddress": "0x1B4FBbAb98e84Dec557727fF585816df81bDd7bC",
+      "title": "Bitcoin Higher or Lower than $70,198.94 on March 12, 2026?",
+      "status": "won",
+      "outcomeIndex": 0,
+      "outcomeLabel": "Higher",
+      "amountUsd": "1.0353448425",
+      "shares": "1.606757",
+      "createdAt": "2026-03-12T13:47:23.328Z",
+      "instanceDate": "2026-03-12",
+      "category": "daily"
+    },
+    {
+      "marketId": "btc-price-prediction",
+      "marketAddress": "0x06Ea63b0d2FCc775ec2cDc70032Ea1dD39FF8036",
+      "title": "Bitcoin Higher or Lower than $69,956.51 on March 11, 2026?",
+      "status": "won",
+      "outcomeIndex": 0,
+      "outcomeLabel": "Higher",
+      "amountUsd": "1.38867708",
+      "shares": "1.971698",
+      "createdAt": "2026-03-11T13:53:23.078Z",
+      "instanceDate": "2026-03-11",
+      "category": "daily"
+    },
+    {
+      "marketId": "xrp-price-prediction",
+      "marketAddress": "0xc3f6BFE058bf45354d1C699BC7280C28aD619C15",
+      "title": "XRP Higher or Lower than $1.387 on March 11, 2026?",
+      "status": "lost",
+      "outcomeIndex": 0,
+      "outcomeLabel": "Higher",
+      "amountUsd": "1.38867708",
+      "shares": "2.18276",
+      "createdAt": "2026-03-11T13:53:13.083Z",
+      "instanceDate": "2026-03-11",
+      "category": "daily"
+    }
+  ]
+}

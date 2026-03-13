@@ -369,21 +369,18 @@ async function loadXRPL() {
 }
 
 async function loadAxiom() {
-  const PROXY = 'https://corsproxy.io/?url=';
-  const BASE = 'https://axiomprotocol.io/api/cli/profile/'+WALLET;
   try {
-    const [profileRes, posRes] = await Promise.all([
-      fetch(PROXY + encodeURIComponent(BASE)),
-      fetch(PROXY + encodeURIComponent(BASE+'/positions?limit=20')),
-    ]);
-    const profile = await profileRes.json();
-    const positions = await posRes.json();
+    // Reads from static JSON pushed by axiom-sync.js running server-side
+    const res = await fetch('axiom-data.json?t='+Date.now());
+    const data = await res.json();
 
-    const stats = profile.stats || {};
+    const stats = data.stats || {};
+    const items = data.bets || [];
     const pnl = parseFloat(stats.pnlUsd||0);
     const winRate = parseFloat(stats.winRate||0);
     const unclaimed = parseFloat(stats.unclaimedPayoutUsd||0);
     const rank = stats.leaderboardRank;
+    const updated = data.updated ? new Date(data.updated).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) : '—';
 
     document.getElementById('axiomPnl').textContent = (pnl>=0?'+':'')+'$'+pnl.toFixed(2);
     document.getElementById('axiomPnl').style.color = pnl>=0?'var(--green)':'var(--red)';
@@ -401,15 +398,13 @@ async function loadAxiom() {
     } else {
       document.getElementById('unclaimedBanner').style.display = 'none';
     }
-    document.getElementById('axiomBadge').textContent = (stats.openMarkets||0)+' OPEN';
+    document.getElementById('axiomBadge').textContent = (stats.openMarkets||0)+' OPEN · '+updated;
 
-    // Bets list
-    const items = (positions.items || []).slice(0,6);
     if (items.length === 0) {
       document.getElementById('axiomBets').innerHTML = '<div style="color:var(--muted);font-size:0.82em">No bets found</div>';
     } else {
       document.getElementById('axiomBets').innerHTML = items.map(b=>{
-        const asset = b.marketId.replace('-price-prediction','').replace(/-/g,' ').toUpperCase();
+        const asset = (b.marketId||'').replace('-price-prediction','').replace(/-/g,' ').toUpperCase();
         const statusColor = b.status==='open'?'var(--gold)':b.status==='won'?'var(--green)':'var(--red)';
         const statusLabel = b.status==='open'?'● OPEN':b.status==='won'?'✅ WON':'❌ LOST';
         return `<div class="bet">
@@ -426,7 +421,7 @@ async function loadAxiom() {
     }
   } catch(e) {
     console.error('Axiom error:',e);
-    document.getElementById('axiomBets').innerHTML='<div style="color:var(--red);font-size:0.8em">Failed to load — CORS issue</div>';
+    document.getElementById('axiomBets').innerHTML='<div style="color:var(--red);font-size:0.8em">Data sync pending...</div>';
   }
 }
 

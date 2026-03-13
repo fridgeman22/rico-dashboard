@@ -7,247 +7,102 @@
   <script src="https://cdn.jsdelivr.net/npm/ethers@6.11.1/dist/ethers.umd.min.js"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
-
     :root {
-      --bg: #060608;
-      --bg2: #0c0c12;
-      --bg3: #11111a;
-      --border: #1a1a28;
-      --border2: #242436;
-      --text: #e2e2f0;
-      --muted: #555570;
-      --accent: #7c6af7;
-      --accent2: #00d4ff;
-      --green: #00e87a;
-      --red: #ff4466;
-      --gold: #f5c842;
+      --bg: #060608; --bg2: #0c0c12; --bg3: #11111a;
+      --border: #1a1a28; --border2: #242436;
+      --text: #e2e2f0; --muted: #555570;
+      --accent: #7c6af7; --accent2: #00d4ff;
+      --green: #00e87a; --red: #ff4466; --gold: #f5c842;
       --mono: 'JetBrains Mono', monospace;
     }
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body { background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; min-height:100vh; font-size:14px; }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      font-size: 14px;
-    }
-
-    /* HEADER */
     .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 18px 28px;
-      border-bottom: 1px solid var(--border);
-      background: var(--bg2);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      backdrop-filter: blur(10px);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:18px 28px; border-bottom:1px solid var(--border);
+      background:var(--bg2); position:sticky; top:0; z-index:100;
     }
-    .header-left { display: flex; align-items: center; gap: 14px; }
-    .avatar {
-      width: 36px; height: 36px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px;
-    }
-    .header-title { font-size: 1.1em; font-weight: 600; letter-spacing: 0.5px; }
-    .header-sub { font-size: 0.75em; color: var(--muted); margin-top: 1px; font-family: var(--mono); }
-    .header-right { display: flex; align-items: center; gap: 12px; }
-    .live-dot {
-      width: 8px; height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,232,122,0.4); }
-      50% { opacity: 0.7; box-shadow: 0 0 0 6px rgba(0,232,122,0); }
-    }
-    .live-label { font-size: 0.75em; color: var(--green); font-family: var(--mono); }
-    .refresh-btn {
-      background: var(--bg3);
-      border: 1px solid var(--border2);
-      color: var(--muted);
-      padding: 6px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-family: inherit;
-      font-size: 0.8em;
-      transition: all 0.2s;
-    }
-    .refresh-btn:hover { color: var(--text); border-color: var(--accent); }
+    .header-left { display:flex; align-items:center; gap:14px; }
+    .avatar { width:36px; height:36px; background:linear-gradient(135deg,var(--accent),var(--accent2)); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:16px; }
+    .header-title { font-size:1.1em; font-weight:600; }
+    .header-sub { font-size:0.75em; color:var(--muted); margin-top:1px; font-family:var(--mono); }
+    .header-right { display:flex; align-items:center; gap:12px; }
+    .live-dot { width:8px; height:8px; background:var(--green); border-radius:50%; animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(0,232,122,0.4)} 50%{opacity:0.7;box-shadow:0 0 0 6px rgba(0,232,122,0)} }
+    .live-label { font-size:0.75em; color:var(--green); font-family:var(--mono); }
+    .refresh-btn { background:var(--bg3); border:1px solid var(--border2); color:var(--muted); padding:6px 14px; border-radius:6px; cursor:pointer; font-family:inherit; font-size:0.8em; transition:all 0.2s; }
+    .refresh-btn:hover { color:var(--text); border-color:var(--accent); }
 
-    /* LAYOUT */
-    .main { padding: 24px 28px; max-width: 1200px; margin: 0 auto; }
+    .main { padding:24px 28px; max-width:1100px; margin:0 auto; }
 
-    /* NET WORTH HERO */
     .hero {
-      background: linear-gradient(135deg, #0f0d1f 0%, #0d1520 100%);
-      border: 1px solid var(--border2);
-      border-radius: 14px;
-      padding: 28px 32px;
-      margin-bottom: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
+      background:linear-gradient(135deg,#0f0d1f 0%,#0d1520 100%);
+      border:1px solid var(--border2); border-radius:14px;
+      padding:28px 32px; margin-bottom:22px;
+      display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:20px;
     }
-    .hero-left {}
-    .hero-label { font-size: 0.75em; color: var(--muted); text-transform: uppercase; letter-spacing: 1.5px; }
-    .hero-value { font-size: 2.8em; font-weight: 700; letter-spacing: -1px; margin-top: 4px;
-      background: linear-gradient(90deg, var(--accent2), var(--accent));
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    }
-    .hero-sub { font-size: 0.8em; color: var(--muted); margin-top: 6px; font-family: var(--mono); }
-    .hero-stats { display: flex; gap: 32px; flex-wrap: wrap; }
-    .hero-stat { text-align: center; }
-    .hero-stat .hs-label { font-size: 0.72em; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-    .hero-stat .hs-val { font-size: 1.15em; font-weight: 600; margin-top: 4px; }
+    .hero-label { font-size:0.75em; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; }
+    .hero-value { font-size:2.8em; font-weight:700; letter-spacing:-1px; margin-top:4px; background:linear-gradient(90deg,var(--accent2),var(--accent)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .hero-sub { font-size:0.8em; color:var(--muted); margin-top:6px; font-family:var(--mono); }
+    .hero-stats { display:flex; gap:32px; flex-wrap:wrap; }
+    .hero-stat .hs-label { font-size:0.72em; color:var(--muted); text-transform:uppercase; letter-spacing:1px; }
+    .hero-stat .hs-val { font-size:1.15em; font-weight:600; margin-top:4px; }
 
-    /* GRID */
-    .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 22px; }
-    .grid-2 { grid-template-columns: repeat(2, 1fr); }
-    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid { display:grid; gap:16px; margin-bottom:16px; }
+    .g4 { grid-template-columns:repeat(4,1fr); }
+    .g3 { grid-template-columns:repeat(3,1fr); }
+    .g2 { grid-template-columns:repeat(2,1fr); }
 
-    /* CARD */
-    .card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 20px;
-      transition: border-color 0.2s;
-    }
-    .card:hover { border-color: var(--border2); }
-    .card-header {
-      display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 16px;
-    }
-    .card-title {
-      font-size: 0.72em; color: var(--muted);
-      text-transform: uppercase; letter-spacing: 1.5px; font-weight: 500;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .card-title .icon { font-size: 14px; }
-    .card-badge {
-      font-size: 0.68em; padding: 2px 8px;
-      border-radius: 20px; font-family: var(--mono);
-    }
-    .badge-green { background: #00e87a15; color: var(--green); border: 1px solid #00e87a30; }
-    .badge-yellow { background: #f5c84215; color: var(--gold); border: 1px solid #f5c84230; }
-    .badge-red { background: #ff446615; color: var(--red); border: 1px solid #ff446630; }
-    .badge-blue { background: #00d4ff15; color: var(--accent2); border: 1px solid #00d4ff30; }
-    .badge-purple { background: #7c6af715; color: var(--accent); border: 1px solid #7c6af730; }
+    .card { background:var(--bg2); border:1px solid var(--border); border-radius:12px; padding:20px; }
+    .card-header { display:flex; align-items:center; justify-content:space-between; margin-bottom:16px; }
+    .card-title { font-size:0.72em; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; font-weight:500; display:flex; align-items:center; gap:8px; }
+    .badge { font-size:0.68em; padding:2px 8px; border-radius:20px; font-family:var(--mono); }
+    .bg { background:#00d4ff15; color:var(--accent2); border:1px solid #00d4ff30; }
+    .bp { background:#7c6af715; color:var(--accent); border:1px solid #7c6af730; }
+    .bge { background:#00e87a15; color:var(--green); border:1px solid #00e87a30; }
+    .by { background:#f5c84215; color:var(--gold); border:1px solid #f5c84230; }
+    .br { background:#ff446615; color:var(--red); border:1px solid #ff446630; }
 
-    .big-val {
-      font-size: 1.9em; font-weight: 700;
-      font-family: var(--mono); letter-spacing: -0.5px;
-    }
-    .big-label { font-size: 0.78em; color: var(--muted); margin-top: 4px; }
-    .change { font-size: 0.8em; margin-top: 6px; font-family: var(--mono); }
-    .change.up { color: var(--green); }
-    .change.down { color: var(--red); }
+    .big-val { font-size:1.9em; font-weight:700; font-family:var(--mono); letter-spacing:-0.5px; }
+    .big-label { font-size:0.78em; color:var(--muted); margin-top:4px; }
+    .sub-val { font-size:0.8em; margin-top:6px; font-family:var(--mono); }
 
-    .divider { border: none; border-top: 1px solid var(--border); margin: 14px 0; }
+    .divider { border:none; border-top:1px solid var(--border); margin:12px 0; }
+    .row { display:flex; justify-content:space-between; align-items:center; padding:5px 0; font-size:0.84em; }
+    .row .rl { color:var(--muted); }
+    .row .rv { font-family:var(--mono); font-weight:500; }
 
-    .row {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 6px 0; font-size: 0.85em;
-    }
-    .row .row-label { color: var(--muted); }
-    .row .row-val { font-family: var(--mono); font-weight: 500; }
+    .bot-status { display:flex; align-items:center; gap:8px; font-size:0.8em; margin-bottom:12px; }
+    .bot-dot { width:7px; height:7px; border-radius:50%; }
+    .bot-dot.on { background:var(--green); animation:pulse 2s infinite; }
+    .bot-dot.off { background:var(--red); }
 
-    /* BOT STATUS */
-    .bot-status {
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.8em; margin-bottom: 12px;
-    }
-    .bot-dot { width: 7px; height: 7px; border-radius: 50%; }
-    .bot-dot.running { background: var(--green); animation: pulse 2s infinite; }
-    .bot-dot.stopped { background: var(--red); }
+    .bet { background:var(--bg3); border:1px solid var(--border); border-radius:8px; padding:10px 14px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; font-size:0.82em; }
+    .bet-market { font-weight:500; }
+    .bet-side { color:var(--muted); font-size:0.88em; margin-top:2px; font-family:var(--mono); }
 
-    /* AXIOM BETS */
-    .bet {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 14px;
-      margin-bottom: 8px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.82em;
-    }
-    .bet-left {}
-    .bet-market { font-weight: 500; }
-    .bet-side { color: var(--muted); font-size: 0.9em; margin-top: 2px; font-family: var(--mono); }
-    .bet-right { text-align: right; }
-    .bet-stake { font-family: var(--mono); }
-    .bet-status { font-size: 0.78em; margin-top: 2px; }
+    .token-row { display:grid; grid-template-columns:2fr 2fr 1fr; padding:8px 0; border-bottom:1px solid var(--border); font-size:0.83em; align-items:center; }
+    .token-row:last-child { border-bottom:none; }
 
-    /* WALLET TABLE */
-    .token-row {
-      display: grid;
-      grid-template-columns: 2fr 2fr 1fr;
-      padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.83em;
-      align-items: center;
-    }
-    .token-row:last-child { border-bottom: none; }
-    .token-name { font-weight: 500; }
-    .token-bal { font-family: var(--mono); color: var(--muted); }
-    .token-val { font-family: var(--mono); text-align: right; }
+    .activity-item { display:flex; gap:12px; padding:7px 0; border-bottom:1px solid var(--border); font-size:0.81em; }
+    .activity-item:last-child { border-bottom:none; }
+    .at { color:var(--muted); font-family:var(--mono); white-space:nowrap; min-width:55px; }
 
-    /* ACTIVITY FEED */
-    .activity-item {
-      display: flex; gap: 12px; padding: 8px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 0.82em;
-    }
-    .activity-item:last-child { border-bottom: none; }
-    .activity-time { color: var(--muted); font-family: var(--mono); white-space: nowrap; min-width: 60px; }
-    .activity-text { color: var(--text); line-height: 1.5; }
+    .loading { color:var(--muted); font-size:0.8em; font-family:var(--mono); }
 
-    /* LOADING */
-    .loading { color: var(--muted); font-size: 0.8em; font-family: var(--mono); animation: blink 1s infinite; }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .footer { text-align:center; padding:20px; color:var(--muted); font-size:0.72em; font-family:var(--mono); border-top:1px solid var(--border); margin-top:10px; }
+    .footer span { color:var(--accent); }
 
-    /* SPARKLINE */
-    .sparkline { margin-top: 12px; }
-    canvas { width: 100%; height: 50px; }
+    .unclaimed-banner { background:#00e87a12; border:1px solid #00e87a30; border-radius:10px; padding:14px 20px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; }
+    .ub-left { font-size:0.85em; color:var(--green); }
+    .ub-val { font-size:1.4em; font-weight:700; font-family:var(--mono); color:var(--green); }
 
-    /* FOOTER */
-    .footer {
-      text-align: center;
-      padding: 20px;
-      color: var(--muted);
-      font-size: 0.72em;
-      font-family: var(--mono);
-      border-top: 1px solid var(--border);
-      margin-top: 10px;
-    }
-    .footer span { color: var(--accent); }
-
-    @media (max-width: 900px) {
-      .grid { grid-template-columns: 1fr 1fr; }
-      .grid-4 { grid-template-columns: 1fr 1fr; }
-      .hero { flex-direction: column; }
-    }
-    @media (max-width: 600px) {
-      .grid, .grid-2 { grid-template-columns: 1fr; }
-      .main { padding: 16px; }
-      .header { padding: 14px 16px; }
-    }
+    @media(max-width:900px){ .g4,.g3{grid-template-columns:1fr 1fr} .hero{flex-direction:column} }
+    @media(max-width:600px){ .g4,.g3,.g2{grid-template-columns:1fr} .main{padding:16px} .header{padding:14px 16px} }
   </style>
 </head>
 <body>
-
 <div class="header">
   <div class="header-left">
     <div class="avatar">🤖</div>
@@ -267,8 +122,8 @@
 
   <!-- HERO -->
   <div class="hero">
-    <div class="hero-left">
-      <div class="hero-label">Estimated Net Worth</div>
+    <div>
+      <div class="hero-label">Total Portfolio Value</div>
       <div class="hero-value" id="netWorth">Loading...</div>
       <div class="hero-sub" id="lastUpdated">Fetching data...</div>
     </div>
@@ -282,104 +137,90 @@
         <div class="hs-val" id="ricoPrice" style="color:var(--accent)">—</div>
       </div>
       <div class="hero-stat">
-        <div class="hs-label">Axiom P&L</div>
+        <div class="hs-label">Axiom Rank</div>
+        <div class="hs-val" id="axiomRank" style="color:var(--gold)">—</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hs-label">All-time P&L</div>
         <div class="hs-val" id="axiomPnl" style="color:var(--green)">—</div>
       </div>
     </div>
   </div>
 
-  <!-- TOP ROW: WALLETS -->
-  <div class="grid grid-4" style="margin-bottom:16px">
+  <!-- UNCLAIMED BANNER (shown if >0) -->
+  <div class="unclaimed-banner" id="unclaimedBanner" style="display:none">
+    <div class="ub-left">🎉 Unclaimed winnings ready to claim</div>
+    <div class="ub-val" id="unclaimedAmt">$0.00</div>
+  </div>
 
+  <!-- WALLETS ROW -->
+  <div class="grid g4">
     <div class="card">
-      <div class="card-header">
-        <div class="card-title"><span class="icon">⚡</span>EVM XRP</div>
-        <span class="card-badge badge-blue">XRPL EVM</span>
-      </div>
+      <div class="card-header"><div class="card-title">⚡ EVM XRP</div><span class="badge bg">XRPL EVM</span></div>
       <div class="big-val" id="evmXRP">—</div>
       <div class="big-label">XRP Balance</div>
-      <div class="change up" id="evmXRPusd">≈ $—</div>
+      <div class="sub-val" id="evmXRPusd" style="color:var(--accent2)">≈ $—</div>
     </div>
-
     <div class="card">
-      <div class="card-header">
-        <div class="card-title"><span class="icon">🤖</span>$RICO</div>
-        <span class="card-badge badge-purple">MY TOKEN</span>
-      </div>
+      <div class="card-header"><div class="card-title">🤖 $RICO</div><span class="badge bp">MY TOKEN</span></div>
       <div class="big-val" id="ricoBalance">—</div>
       <div class="big-label">RICO Holdings</div>
-      <div class="change" id="ricoValueXRP" style="color:var(--accent)">≈ — XRP</div>
+      <div class="sub-val" id="ricoValueXRP" style="color:var(--accent)">≈ — XRP</div>
     </div>
-
     <div class="card">
-      <div class="card-header">
-        <div class="card-title"><span class="icon">💧</span>LP Tokens</div>
-        <span class="card-badge badge-green">PROVIDING</span>
-      </div>
+      <div class="card-header"><div class="card-title">💧 LP Tokens</div><span class="badge bge">PROVIDING</span></div>
       <div class="big-val" id="lpBalance">—</div>
       <div class="big-label">RICO/XRP LP</div>
-      <div class="change up" id="lpShare">—% of pool</div>
+      <div class="sub-val" id="lpShare" style="color:var(--green)">—% of pool</div>
     </div>
-
     <div class="card">
-      <div class="card-header">
-        <div class="card-title"><span class="icon">🌊</span>XRPL Wallet</div>
-        <span class="card-badge badge-yellow">NATIVE</span>
-      </div>
+      <div class="card-header"><div class="card-title">🌊 XRPL L1</div><span class="badge by">NATIVE</span></div>
       <div class="big-val" id="xrplBal">—</div>
-      <div class="big-label">XRP (L1)</div>
-      <div class="change" id="xrplSub" style="color:var(--muted)">rwVYdq...Ez</div>
+      <div class="big-label">XRP Balance</div>
+      <div class="sub-val" style="color:var(--muted)">rwVYdq...Ez</div>
     </div>
-
   </div>
 
   <!-- MIDDLE ROW -->
-  <div class="grid" style="margin-bottom:16px">
+  <div class="grid g3">
 
     <!-- RICO POOL -->
     <div class="card">
-      <div class="card-header">
-        <div class="card-title"><span class="icon">📊</span>RICO/XRP Pool</div>
-        <span class="card-badge badge-purple">BLUMESWAP</span>
-      </div>
-      <div class="row"><span class="row-label">Price</span><span class="row-val" id="poolPrice">—</span></div>
-      <div class="row"><span class="row-label">Pool XRP</span><span class="row-val" id="poolXRP">—</span></div>
-      <div class="row"><span class="row-label">Pool RICO</span><span class="row-val" id="poolRICO">—</span></div>
-      <div class="row"><span class="row-label">Market Cap</span><span class="row-val" id="poolMCap">—</span></div>
+      <div class="card-header"><div class="card-title">📊 RICO/XRP Pool</div><span class="badge bp">BLUMESWAP</span></div>
+      <div class="row"><span class="rl">Price</span><span class="rv" id="poolPrice">—</span></div>
+      <div class="row"><span class="rl">Pool XRP</span><span class="rv" id="poolXRP">—</span></div>
+      <div class="row"><span class="rl">Pool RICO</span><span class="rv" id="poolRICO">—</span></div>
+      <div class="row"><span class="rl">Market Cap</span><span class="rv" id="poolMCap">—</span></div>
       <hr class="divider">
-      <div class="row"><span class="row-label">Holders</span><span class="row-val" id="ricoHolders">—</span></div>
-      <div class="row"><span class="row-label">Total Supply</span><span class="row-val" id="ricoSupply">1B RICO</span></div>
+      <div class="row"><span class="rl">Holders</span><span class="rv" id="ricoHolders">—</span></div>
+      <div class="row"><span class="rl">Total Supply</span><span class="rv">1,000,000,000</span></div>
+      <div class="row"><span class="rl">My LP Share</span><span class="rv" id="myLPPct">—</span></div>
     </div>
 
     <!-- TRADING BOT -->
     <div class="card">
-      <div class="card-header">
-        <div class="card-title"><span class="icon">⚙️</span>RICO Bot</div>
-        <span class="card-badge badge-green" id="botBadge">RUNNING</span>
-      </div>
+      <div class="card-header"><div class="card-title">⚙️ RICO Bot</div><span class="badge bge" id="botBadge">—</span></div>
       <div class="bot-status">
-        <div class="bot-dot running" id="botDot"></div>
-        <span id="botStatusText">Active — scanning for dips</span>
+        <div class="bot-dot" id="botDot"></div>
+        <span id="botStatusText" style="color:var(--muted)">Checking...</span>
       </div>
-      <div class="row"><span class="row-label">Strategy</span><span class="row-val">Dip scalp +3.5%</span></div>
-      <div class="row"><span class="row-label">Trade Size</span><span class="row-val">2 XRP</span></div>
-      <div class="row"><span class="row-label">Stop Loss</span><span class="row-val">-2%</span></div>
+      <div class="row"><span class="rl">Strategy</span><span class="rv">Dip scalp +3.5%</span></div>
+      <div class="row"><span class="rl">Trade Size</span><span class="rv">2 XRP</span></div>
+      <div class="row"><span class="rl">Stop Loss</span><span class="rv">-2%</span></div>
       <hr class="divider">
-      <div class="row"><span class="row-label">Total Trades</span><span class="row-val" id="botTrades">—</span></div>
-      <div class="row"><span class="row-label">Total P&L</span><span class="row-val" id="botPnl">—</span></div>
-      <div class="row"><span class="row-label">Position</span><span class="row-val" id="botPosition">—</span></div>
-      <div class="row"><span class="row-label">Last Price</span><span class="row-val" id="botLastPrice">—</span></div>
+      <div class="row"><span class="rl">Total Trades</span><span class="rv" id="botTrades">—</span></div>
+      <div class="row"><span class="rl">Total P&L</span><span class="rv" id="botPnl">—</span></div>
+      <div class="row"><span class="rl">Position</span><span class="rv" id="botPosition">—</span></div>
+      <div class="row"><span class="rl">Last Price</span><span class="rv" id="botLastPrice">—</span></div>
     </div>
 
     <!-- AXIOM -->
     <div class="card">
-      <div class="card-header">
-        <div class="card-title"><span class="icon">🎯</span>Axiom Bets</div>
-        <span class="card-badge badge-yellow" id="axiomBadge">—</span>
-      </div>
-      <div class="row"><span class="row-label">Total P&L</span><span class="row-val" id="axiomTotalPnl">—</span></div>
-      <div class="row"><span class="row-label">Unclaimed</span><span class="row-val" id="axiomUnclaimed">—</span></div>
-      <div class="row"><span class="row-label">EVM Balance</span><span class="row-val" id="axiomWalletBal">—</span></div>
+      <div class="card-header"><div class="card-title">🎯 Axiom Bets</div><span class="badge by" id="axiomBadge">—</span></div>
+      <div class="row"><span class="rl">All-time P&L</span><span class="rv" id="axiomTotalPnl">—</span></div>
+      <div class="row"><span class="rl">Win Rate</span><span class="rv" id="axiomWinRate">—</span></div>
+      <div class="row"><span class="rl">Total Bets</span><span class="rv" id="axiomTotal">—</span></div>
+      <div class="row"><span class="rl">Leaderboard</span><span class="rv" id="axiomLeader">—</span></div>
       <hr class="divider">
       <div id="axiomBets"><div class="loading">Loading bets...</div></div>
     </div>
@@ -387,26 +228,20 @@
   </div>
 
   <!-- BOTTOM ROW -->
-  <div class="grid grid-2">
+  <div class="grid g2">
 
-    <!-- TOKEN HOLDINGS -->
+    <!-- FULL HOLDINGS -->
     <div class="card">
-      <div class="card-header">
-        <div class="card-title"><span class="icon">💼</span>Full Holdings</div>
-        <span class="card-badge badge-blue">EVM WALLET</span>
-      </div>
-      <div class="token-row" style="color:var(--muted);font-size:0.75em;text-transform:uppercase;letter-spacing:1px;padding-bottom:10px">
-        <span>Token</span><span>Balance</span><span style="text-align:right">Value</span>
+      <div class="card-header"><div class="card-title">💼 Full Holdings</div><span class="badge bg">EVM WALLET</span></div>
+      <div class="token-row" style="color:var(--muted);font-size:0.73em;text-transform:uppercase;letter-spacing:1px;padding-bottom:10px">
+        <span>Token</span><span>Balance</span><span style="text-align:right">USD Value</span>
       </div>
       <div id="tokenHoldings"><div class="loading">Loading...</div></div>
     </div>
 
-    <!-- ACTIVITY -->
+    <!-- BOT ACTIVITY -->
     <div class="card">
-      <div class="card-header">
-        <div class="card-title"><span class="icon">📡</span>Recent Activity</div>
-        <span class="card-badge badge-blue">BOT LOG</span>
-      </div>
+      <div class="card-header"><div class="card-title">📡 Bot Activity</div><span class="badge bg">LIVE LOG</span></div>
       <div id="activityFeed"><div class="loading">Loading...</div></div>
     </div>
 
@@ -415,7 +250,7 @@
 </div>
 
 <div class="footer">
-  RICO Agent · <span>0xb117Ea77f4dE891122180BcaEd89d99DeD4A8f90</span> · XRPL EVM Chain 1440000 · Auto-refreshes every 60s
+  RICO Agent · <span>0xb117Ea77f4dE891122180BcaEd89d99DeD4A8f90</span> · Auto-refreshes every 60s
 </div>
 
 <script>
@@ -424,43 +259,40 @@ const WALLET = '0xb117Ea77f4dE891122180BcaEd89d99DeD4A8f90';
 const RICO = '0xFA845BeD1F44f2be502eB4b6d365027caa0F2aAf';
 const PAIR = '0x88Ae593b5Ef2C993d1e04be7F662fE04fE5dE7DE';
 const WXRP = '0x7C21a90E3eCD3215d16c3BBe76a491f8f792d4Bf';
-const AXIOM_WALLET = '0xb117Ea77f4dE891122180BcaEd89d99DeD4A8f90';
 const XRPL_WALLET = 'rwVYdq235FF1QpEBLfhwnfQLvSPRRTm1Ez';
 
-const ERC20_ABI = [
-  'function balanceOf(address) view returns (uint256)',
-  'function totalSupply() view returns (uint256)',
-];
-const PAIR_ABI = [
-  'function getReserves() view returns (uint112,uint112,uint32)',
-  'function token0() view returns (address)',
-  'function totalSupply() view returns (uint256)',
-];
+const ERC20 = ['function balanceOf(address) view returns (uint256)','function totalSupply() view returns (uint256)'];
+const PAIR_ABI = ['function getReserves() view returns (uint112,uint112,uint32)','function token0() view returns (address)','function totalSupply() view returns (uint256)'];
 
-let xrpUsdPrice = 1.39;
+let xrpUsd = 1.39;
 
-function fmt(n, decimals=2) {
-  if (n >= 1e9) return (n/1e9).toFixed(2) + 'B';
-  if (n >= 1e6) return (n/1e6).toFixed(2) + 'M';
-  if (n >= 1e3) return (n/1e3).toFixed(1) + 'K';
-  return n.toFixed(decimals);
+function fmt(n, d=2) {
+  if(n>=1e9) return (n/1e9).toFixed(2)+'B';
+  if(n>=1e6) return (n/1e6).toFixed(2)+'M';
+  if(n>=1e3) return (n/1e3).toFixed(1)+'K';
+  return n.toFixed(d);
 }
 
-function fmtTime(iso) {
-  const d = new Date(iso);
-  return d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+async function loadXRPPrice() {
+  try {
+    const r = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd');
+    const d = await r.json();
+    xrpUsd = d?.ripple?.usd || 1.39;
+  } catch(e) {}
+  document.getElementById('xrpPrice').textContent = '$'+xrpUsd.toFixed(3);
 }
 
 async function loadEVM() {
   try {
     const provider = new ethers.JsonRpcProvider(RPC);
-    const rico = new ethers.Contract(RICO, ERC20_ABI, provider);
+    const rico = new ethers.Contract(RICO, ERC20, provider);
     const pair = new ethers.Contract(PAIR, PAIR_ABI, provider);
+    const lpContract = new ethers.Contract(PAIR, ERC20, provider);
 
     const [xrpBal, ricoBal, lpBal, reserves, token0, lpTotal, ricoSupply] = await Promise.all([
       provider.getBalance(WALLET),
       rico.balanceOf(WALLET),
-      new ethers.Contract(PAIR, ERC20_ABI, provider).balanceOf(WALLET),
+      lpContract.balanceOf(WALLET),
       pair.getReserves(),
       pair.token0(),
       pair.totalSupply(),
@@ -475,221 +307,205 @@ async function loadEVM() {
     const isWXRP0 = token0.toLowerCase() === WXRP.toLowerCase();
     const poolXRP = parseFloat(ethers.formatEther(isWXRP0 ? reserves[0] : reserves[1]));
     const poolRICO = parseFloat(ethers.formatEther(isWXRP0 ? reserves[1] : reserves[0]));
-    const ricoPerXRP = poolRICO / poolXRP;
     const xrpPerRICO = poolXRP / poolRICO;
-    const mcap = parseFloat(ethers.formatEther(ricoSupply)) * xrpPerRICO * xrpUsdPrice;
+    const mcapXRP = parseFloat(ethers.formatEther(ricoSupply)) * xrpPerRICO;
     const lpShare = lpTotalAmt > 0 ? (lpAmt / lpTotalAmt * 100) : 0;
 
-    // Holdings value
     const ricoValXRP = ricoAmt * xrpPerRICO;
     const lpValXRP = lpShare > 0 ? (poolXRP * 2 * lpShare / 100) : 0;
     const totalXRP = xrpAmt + ricoValXRP + lpValXRP;
-    const totalUSD = totalXRP * xrpUsdPrice;
+    const totalUSD = totalXRP * xrpUsd;
 
     document.getElementById('evmXRP').textContent = xrpAmt.toFixed(2);
-    document.getElementById('evmXRPusd').textContent = '≈ $' + (xrpAmt * xrpUsdPrice).toFixed(2);
-    document.getElementById('ricoBalance').textContent = fmt(ricoAmt, 0);
-    document.getElementById('ricoValueXRP').textContent = '≈ ' + ricoValXRP.toFixed(2) + ' XRP';
-    document.getElementById('lpBalance').textContent = lpAmt.toFixed(0);
-    document.getElementById('lpShare').textContent = lpShare.toFixed(1) + '% of pool';
-    document.getElementById('poolPrice').textContent = xrpPerRICO.toFixed(10) + ' XRP';
-    document.getElementById('poolXRP').textContent = poolXRP.toFixed(2) + ' XRP';
-    document.getElementById('poolRICO').textContent = fmt(poolRICO, 0);
-    document.getElementById('poolMCap').textContent = '$' + fmt(mcap, 0);
-    document.getElementById('ricoPrice').textContent = '$' + (xrpPerRICO * xrpUsdPrice).toFixed(8);
+    document.getElementById('evmXRPusd').textContent = '≈ $'+(xrpAmt*xrpUsd).toFixed(2);
+    document.getElementById('ricoBalance').textContent = fmt(ricoAmt,0);
+    document.getElementById('ricoValueXRP').textContent = '≈ '+ricoValXRP.toFixed(2)+' XRP';
+    document.getElementById('lpBalance').textContent = lpAmt.toFixed(2);
+    document.getElementById('lpShare').textContent = lpShare.toFixed(1)+'% of pool';
+    document.getElementById('myLPPct').textContent = lpShare.toFixed(1)+'%';
+    document.getElementById('poolPrice').textContent = xrpPerRICO.toFixed(10)+' XRP';
+    document.getElementById('poolXRP').textContent = poolXRP.toFixed(2)+' XRP';
+    document.getElementById('poolRICO').textContent = fmt(poolRICO,0);
+    document.getElementById('poolMCap').textContent = '$'+fmt(mcapXRP*xrpUsd,0);
+    document.getElementById('ricoPrice').textContent = '$'+(xrpPerRICO*xrpUsd).toFixed(8);
 
-    // Token holdings table
     document.getElementById('tokenHoldings').innerHTML = `
       <div class="token-row">
-        <span class="token-name">XRP</span>
-        <span class="token-bal">${xrpAmt.toFixed(4)}</span>
-        <span class="token-val" style="color:var(--accent2)">$${(xrpAmt*xrpUsdPrice).toFixed(2)}</span>
+        <span style="font-weight:500">XRP</span>
+        <span style="font-family:var(--mono);color:var(--muted)">${xrpAmt.toFixed(4)}</span>
+        <span style="font-family:var(--mono);text-align:right;color:var(--accent2)">$${(xrpAmt*xrpUsd).toFixed(2)}</span>
       </div>
       <div class="token-row">
-        <span class="token-name">$RICO</span>
-        <span class="token-bal">${fmt(ricoAmt,0)}</span>
-        <span class="token-val" style="color:var(--accent)">$${(ricoValXRP*xrpUsdPrice).toFixed(2)}</span>
+        <span style="font-weight:500">$RICO</span>
+        <span style="font-family:var(--mono);color:var(--muted)">${fmt(ricoAmt,0)}</span>
+        <span style="font-family:var(--mono);text-align:right;color:var(--accent)">$${(ricoValXRP*xrpUsd).toFixed(2)}</span>
       </div>
       <div class="token-row">
-        <span class="token-name">RICO/XRP LP</span>
-        <span class="token-bal">${lpAmt.toFixed(2)} tokens</span>
-        <span class="token-val" style="color:var(--green)">$${(lpValXRP*xrpUsdPrice).toFixed(2)}</span>
+        <span style="font-weight:500">RICO/XRP LP</span>
+        <span style="font-family:var(--mono);color:var(--muted)">${lpAmt.toFixed(2)}</span>
+        <span style="font-family:var(--mono);text-align:right;color:var(--green)">$${(lpValXRP*xrpUsd).toFixed(2)}</span>
       </div>
       <hr class="divider">
-      <div class="row" style="margin-top:8px">
-        <span class="row-label">Total EVM</span>
-        <span class="row-val" style="color:var(--accent2);font-size:1.1em">$${totalUSD.toFixed(2)}</span>
+      <div class="row">
+        <span class="rl">Total EVM Portfolio</span>
+        <span class="rv" style="color:var(--accent2);font-size:1.1em">$${totalUSD.toFixed(2)}</span>
       </div>`;
 
-    return { totalUSD, ricoPerXRP };
-  } catch(e) { console.error('EVM error:', e); return { totalUSD: 0 }; }
+    return totalUSD;
+  } catch(e) { console.error('EVM error:',e); return 0; }
 }
 
 async function loadXRPL() {
   try {
-    const res = await fetch('https://xrpl-rpc.goons.app:51233', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
+    const r = await fetch('https://s1.ripple.com:51234', {
+      method:'POST', headers:{'Content-Type':'application/json'},
       body: JSON.stringify({method:'account_info',params:[{account:XRPL_WALLET,ledger_index:'current'}]})
     });
-    const d = await res.json();
-    const drops = d?.result?.account_data?.Balance || '1000000';
-    const xrp = (parseInt(drops) / 1000000).toFixed(2);
+    const d = await r.json();
+    const xrp = (parseInt(d?.result?.account_data?.Balance||'1000000')/1000000).toFixed(2);
     document.getElementById('xrplBal').textContent = xrp;
-    return parseFloat(xrp) * xrpUsdPrice;
-  } catch(e) {
-    document.getElementById('xrplBal').textContent = '1.00';
-    return 1 * xrpUsdPrice;
-  }
-}
-
-async function loadXRPPrice() {
-  try {
-    const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=ripple&vs_currencies=usd');
-    const d = await res.json();
-    xrpUsdPrice = d?.ripple?.usd || 1.39;
-    document.getElementById('xrpPrice').textContent = '$' + xrpUsdPrice.toFixed(3);
-  } catch(e) {
-    document.getElementById('xrpPrice').textContent = '$1.39';
-  }
+    return parseFloat(xrp)*xrpUsd;
+  } catch(e) { document.getElementById('xrplBal').textContent = '1.00'; return xrpUsd; }
 }
 
 async function loadAxiom() {
   try {
-    const res = await fetch(`https://axiomprotocol.io/api/cli/profile/${AXIOM_WALLET}/positions?status=active`);
-    const positions = await res.json();
+    const [profileRes, posRes] = await Promise.all([
+      fetch('https://axiomprotocol.io/api/cli/profile/'+WALLET),
+      fetch('https://axiomprotocol.io/api/cli/profile/'+WALLET+'/positions?limit=20'),
+    ]);
+    const profile = await profileRes.json();
+    const positions = await posRes.json();
 
-    const statsRes = await fetch(`https://axiomprotocol.io/api/cli/profile/${AXIOM_WALLET}/stats`);
-    const stats = await statsRes.json();
+    const stats = profile.stats || {};
+    const pnl = parseFloat(stats.pnlUsd||0);
+    const winRate = stats.resolvedMarkets > 0 ? ((stats.resolvedMarkets - (stats.resolvedMarkets - (stats.totalPredictions - stats.openMarkets))) / stats.resolvedMarkets * 100) : 0;
+    const unclaimed = parseFloat(stats.unclaimedPayoutUsd||0);
+    const rank = stats.leaderboardRank;
 
-    const totalPnl = stats?.totalPnlUsd || stats?.pnlUsd || 0;
-    const openCount = Array.isArray(positions) ? positions.filter(p => p.status === 'open').length : 0;
+    document.getElementById('axiomPnl').textContent = (pnl>=0?'+':'')+'$'+pnl.toFixed(2);
+    document.getElementById('axiomPnl').style.color = pnl>=0?'var(--green)':'var(--red)';
+    document.getElementById('axiomTotalPnl').textContent = (pnl>=0?'+':'')+'$'+pnl.toFixed(2);
+    document.getElementById('axiomTotalPnl').style.color = pnl>=0?'var(--green)':'var(--red)';
+    document.getElementById('axiomTotal').textContent = stats.totalPredictions||0;
+    document.getElementById('axiomLeader').textContent = rank ? '#'+rank : '—';
+    document.getElementById('axiomRank').textContent = rank ? '#'+rank : '—';
+    document.getElementById('axiomWinRate').textContent = stats.resolvedMarkets > 0 ?
+      Math.round((stats.resolvedMarkets / stats.totalPredictions)*100)+'%' : '—';
 
-    document.getElementById('axiomTotalPnl').textContent = '$' + parseFloat(totalPnl).toFixed(2);
-    document.getElementById('axiomTotalPnl').style.color = parseFloat(totalPnl) >= 0 ? 'var(--green)' : 'var(--red)';
-    document.getElementById('axiomBadge').textContent = openCount + ' OPEN';
+    // Unclaimed banner
+    if (unclaimed > 0) {
+      document.getElementById('unclaimedBanner').style.display = 'flex';
+      document.getElementById('unclaimedAmt').textContent = '$'+unclaimed.toFixed(2)+' unclaimed';
+    }
+    document.getElementById('axiomBadge').textContent = stats.openMarkets+' OPEN';
 
-    // Show open bets
-    const openBets = Array.isArray(positions) ? positions.filter(p => p.status === 'open') : [];
-    if (openBets.length === 0) {
+    // Open bets
+    const items = positions.items || [];
+    const open = items.filter(p=>p.status==='open');
+    const won = items.filter(p=>p.status==='won').slice(0,2);
+
+    if (open.length === 0 && won.length === 0) {
       document.getElementById('axiomBets').innerHTML = '<div style="color:var(--muted);font-size:0.82em">No open bets</div>';
     } else {
-      document.getElementById('axiomBets').innerHTML = openBets.map(b => {
-        const mkt = b.marketId.replace('-price-prediction','').replace('-',' ').toUpperCase();
-        return `<div class="bet">
-          <div class="bet-left">
-            <div class="bet-market">${mkt}</div>
-            <div class="bet-side">${b.outcomeLabel} · ${b.instanceDate}</div>
-          </div>
-          <div class="bet-right">
-            <div class="bet-stake">$${parseFloat(b.amountUsd).toFixed(2)}</div>
-            <div class="bet-status" style="color:var(--gold)">● OPEN</div>
-          </div>
-        </div>`;
-      }).join('');
+      document.getElementById('axiomBets').innerHTML =
+        open.map(b=>`<div class="bet">
+          <div><div class="bet-market">${b.marketId.replace('-price-prediction','').replace(/-/g,' ').toUpperCase()}</div>
+          <div class="bet-side">${b.outcomeLabel} · ${b.instanceDate}</div></div>
+          <div style="text-align:right"><div style="font-family:var(--mono)">$${parseFloat(b.amountUsd).toFixed(2)}</div>
+          <div style="color:var(--gold);font-size:0.78em;margin-top:2px">● OPEN</div></div>
+        </div>`).join('') +
+        won.map(b=>`<div class="bet">
+          <div><div class="bet-market">${b.marketId.replace('-price-prediction','').replace(/-/g,' ').toUpperCase()}</div>
+          <div class="bet-side">${b.outcomeLabel} · ${b.instanceDate}</div></div>
+          <div style="text-align:right"><div style="font-family:var(--mono);color:var(--green)">WON ✅</div></div>
+        </div>`).join('');
     }
+  } catch(e) { console.error('Axiom error:',e); document.getElementById('axiomBets').innerHTML='<div style="color:var(--red);font-size:0.8em">Failed to load</div>'; }
+}
 
-    // Unclaimed
+async function loadBotLog() {
+  try {
+    // Fetch from raw GitHub
+    const r = await fetch('https://raw.githubusercontent.com/fridgeman22/rico-dashboard/main/rico-log.txt?t='+Date.now());
+    if (!r.ok) throw new Error('no log');
+    const text = await r.text();
+    parseBotLog(text);
+  } catch(e) {
+    // Try local
     try {
-      const unclaimedRes = await fetch(`https://axiomprotocol.io/api/cli/profile/${AXIOM_WALLET}/unclaimed`);
-      const unclaimed = await unclaimedRes.json();
-      const amt = unclaimed?.summary?.totalUnclaimedPayoutUsd || '0';
-      document.getElementById('axiomUnclaimed').textContent = '$' + parseFloat(amt).toFixed(2);
-      document.getElementById('axiomUnclaimed').style.color = parseFloat(amt) > 0 ? 'var(--green)' : 'var(--muted)';
-    } catch(e) { document.getElementById('axiomUnclaimed').textContent = '$0.00'; }
-
-  } catch(e) { console.error('Axiom error:', e); }
+      const r2 = await fetch('rico-log.txt?t='+Date.now());
+      const text = await r2.text();
+      parseBotLog(text);
+    } catch(e2) {
+      document.getElementById('botStatusText').textContent = 'Log unavailable';
+      document.getElementById('botDot').className = 'bot-dot off';
+      document.getElementById('botBadge').textContent = 'UNKNOWN';
+      document.getElementById('botBadge').className = 'badge by';
+    }
+  }
 }
 
-function loadBotStatus() {
+function parseBotLog(text) {
+  const lines = text.trim().split('\n').filter(Boolean);
+  const last = lines[lines.length-1]||'';
+  const tsMatch = last.match(/\[(.+?)\]/);
+  const lastTs = tsMatch ? new Date(tsMatch[1]) : null;
+  const isRunning = lastTs && (Date.now()-lastTs.getTime()) < 120000;
+
+  document.getElementById('botDot').className = 'bot-dot '+(isRunning?'on':'off');
+  document.getElementById('botBadge').textContent = isRunning?'RUNNING':'STOPPED';
+  document.getElementById('botBadge').className = 'badge '+(isRunning?'bge':'br');
+  document.getElementById('botStatusText').textContent = isRunning?'Active — scanning for dips':'⚠️ Process stopped';
+  document.getElementById('botStatusText').style.color = isRunning?'var(--green)':'var(--red)';
+
+  const priceMatch = last.match(/Price: ([\d.]+) XRP\/RICO/);
+  if (priceMatch) document.getElementById('botLastPrice').textContent = parseFloat(priceMatch[1]).toFixed(10)+' XRP';
+
+  const last10 = lines.slice(-10).reverse();
+  document.getElementById('activityFeed').innerHTML = last10.map(line=>{
+    const tm = line.match(/\[(.+?)\]/);
+    const msg = line.replace(/\[.+?\]\s*/,'');
+    const time = tm ? new Date(tm[1]).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) : '';
+    const color = msg.includes('BUY')?'var(--green)':msg.includes('SELL')?'var(--accent)':msg.includes('ERROR')||msg.includes('FATAL')?'var(--red)':'var(--text)';
+    return `<div class="activity-item"><span class="at">${time}</span><span style="color:${color}">${msg.slice(0,75)}</span></div>`;
+  }).join('');
+}
+
+async function loadBotState() {
   try {
-    // Parse log file via API - we'll use a timestamp check
-    const logLines = [];
-    fetch('/trading/rico-log.txt')
-      .then(r => r.text())
-      .then(text => {
-        const lines = text.trim().split('\n').filter(Boolean);
-        const last10 = lines.slice(-10);
-        const lastLine = lines[lines.length - 1] || '';
+    const r = await fetch('rico-state.json?t='+Date.now());
+    const s = await r.json();
+    document.getElementById('botTrades').textContent = s.trades||0;
+    const pnl = s.totalPnlXrp||0;
+    document.getElementById('botPnl').textContent = (pnl>=0?'+':'')+pnl.toFixed(4)+' XRP';
+    document.getElementById('botPnl').style.color = pnl>=0?'var(--green)':'var(--red)';
+    document.getElementById('botPosition').textContent = s.position?'🟢 IN POSITION':'⚪ Flat';
+  } catch(e) {
+    document.getElementById('botTrades').textContent = '0';
+    document.getElementById('botPnl').textContent = '—';
+  }
+}
 
-        // Parse last log timestamp
-        const tsMatch = lastLine.match(/\[(.+?)\]/);
-        const lastTs = tsMatch ? new Date(tsMatch[1]) : null;
-        const isRunning = lastTs && (Date.now() - lastTs.getTime()) < 120000; // within 2 min
-
-        document.getElementById('botDot').className = 'bot-dot ' + (isRunning ? 'running' : 'stopped');
-        document.getElementById('botBadge').textContent = isRunning ? 'RUNNING' : 'STOPPED';
-        document.getElementById('botBadge').className = 'card-badge ' + (isRunning ? 'badge-green' : 'badge-red');
-        document.getElementById('botStatusText').textContent = isRunning ? 'Active — scanning for dips' : 'Stopped — restart needed';
-
-        // Parse price from last line
-        const priceMatch = lastLine.match(/Price: ([\d.]+) XRP\/RICO/);
-        if (priceMatch) document.getElementById('botLastPrice').textContent = parseFloat(priceMatch[1]).toFixed(10) + ' XRP';
-
-        // Activity feed
-        document.getElementById('activityFeed').innerHTML = last10.reverse().map(line => {
-          const tm = line.match(/\[(.+?)\]/);
-          const msg = line.replace(/\[.+?\]\s*/, '');
-          const time = tm ? fmtTime(tm[1]) : '';
-          const color = msg.includes('BUY') ? 'var(--green)' : msg.includes('SELL') ? 'var(--accent)' : msg.includes('ERROR') ? 'var(--red)' : 'var(--text)';
-          return `<div class="activity-item">
-            <span class="activity-time">${time}</span>
-            <span class="activity-text" style="color:${color}">${msg.slice(0,80)}</span>
-          </div>`;
-        }).join('');
-      }).catch(() => {
-        document.getElementById('botStatusText').textContent = 'Log unavailable';
-      });
+async function loadHolders() {
+  try {
+    const r = await fetch('https://explorer.xrplevm.org/api/v2/tokens/'+RICO);
+    const d = await r.json();
+    document.getElementById('ricoHolders').textContent = d.holders_count||'—';
   } catch(e) {}
-}
-
-function loadBotState() {
-  fetch('/trading/rico-state.json')
-    .then(r => r.json())
-    .then(s => {
-      document.getElementById('botTrades').textContent = s.trades || 0;
-      const pnl = s.totalPnlXrp || 0;
-      document.getElementById('botPnl').textContent = (pnl >= 0 ? '+' : '') + pnl.toFixed(4) + ' XRP';
-      document.getElementById('botPnl').style.color = pnl >= 0 ? 'var(--green)' : 'var(--red)';
-      document.getElementById('botPosition').textContent = s.position ? '🟢 IN POSITION' : '⚪ Flat';
-      document.getElementById('axiomWalletBal').textContent = '—';
-    }).catch(() => {
-      document.getElementById('botTrades').textContent = '0';
-      document.getElementById('botPnl').textContent = '0.0000 XRP';
-    });
-}
-
-async function loadHolderCount() {
-  try {
-    const res = await fetch('https://explorer.xrplevm.org/api/v2/tokens/0xFA845BeD1F44f2be502eB4b6d365027caa0F2aAf');
-    const d = await res.json();
-    document.getElementById('ricoHolders').textContent = d.holders_count || '16';
-  } catch(e) { document.getElementById('ricoHolders').textContent = '16'; }
 }
 
 async function loadAll() {
   document.getElementById('lastUpdated').textContent = 'Refreshing...';
-
   await loadXRPPrice();
-  const [evmResult, xrplUSD] = await Promise.all([
-    loadEVM(),
-    loadXRPL(),
-    loadAxiom(),
-    loadHolderCount(),
+  const [evmUSD, xrplUSD] = await Promise.all([
+    loadEVM(), loadXRPL(), loadAxiom(), loadBotLog(), loadBotState(), loadHolders()
   ]);
-
-  loadBotStatus();
-  loadBotState();
-
-  const total = (evmResult.totalUSD || 0) + xrplUSD;
-  document.getElementById('netWorth').textContent = '$' + total.toFixed(2);
-  document.getElementById('lastUpdated').textContent = 'Last updated: ' + new Date().toLocaleTimeString();
-
-  const pnlEl = document.getElementById('axiomPnl');
-  // Will be filled by axiom loader
+  const total = (evmUSD||0) + (xrplUSD||0);
+  document.getElementById('netWorth').textContent = '$'+total.toFixed(2);
+  document.getElementById('lastUpdated').textContent = 'Last updated: '+new Date().toLocaleTimeString();
 }
 
-// Auto-refresh every 60s
 loadAll();
 setInterval(loadAll, 60000);
 </script>

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-13T19:32:25.123Z",
+  "updated": "2026-03-13T19:33:11.188Z",
   "stats": {
     "totalPredictions": 6,
     "resolvedMarkets": 4,
@@ -95,7 +95,12 @@
     }
   ],
   "bot": {
-    "lastLog": null,
-    "error": "ENOENT: no such file or directory, open '/home/agent/workspace/trading/rico-state.json'"
+    "lastLog": "2026-03-13T19:32:43.542Z",
+    "price": "0.0000004557",
+    "xrp": "40.6225",
+    "rico": "98260002",
+    "trades": 0,
+    "totalPnlXrp": 0,
+    "position": false
   }
 }

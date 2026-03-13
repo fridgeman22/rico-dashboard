@@ -427,65 +427,43 @@ async function loadAxiom() {
 
 async function loadBotLog() {
   try {
-    // Fetch from raw GitHub
-    const r = await fetch('https://raw.githubusercontent.com/fridgeman22/rico-dashboard/main/rico-log.txt?t='+Date.now());
-    if (!r.ok) throw new Error('no log');
-    const text = await r.text();
-    parseBotLog(text);
+    const r = await fetch('axiom-data.json?t='+Date.now());
+    const data = await r.json();
+    const bot = data.bot || {};
+
+    const lastTs = bot.lastLog ? new Date(bot.lastLog) : null;
+    const syncTs = data.updated ? new Date(data.updated) : null;
+    // Bot is running if last log was within 3 minutes of the sync time
+    const isRunning = lastTs && syncTs && (syncTs.getTime() - lastTs.getTime()) < 180000;
+
+    document.getElementById('botDot').className = 'bot-dot '+(isRunning?'on':'off');
+    document.getElementById('botBadge').textContent = isRunning?'RUNNING':'STOPPED';
+    document.getElementById('botBadge').className = 'badge '+(isRunning?'bge':'br');
+    document.getElementById('botStatusText').textContent = isRunning?'Active — scanning for dips':'⚠️ Process stopped';
+    document.getElementById('botStatusText').style.color = isRunning?'var(--green)':'var(--red)';
+
+    if (bot.price) document.getElementById('botLastPrice').textContent = parseFloat(bot.price).toFixed(10)+' XRP';
+    document.getElementById('botTrades').textContent = bot.trades || 0;
+    const pnl = bot.totalPnlXrp || 0;
+    document.getElementById('botPnl').textContent = (pnl>=0?'+':'')+pnl.toFixed(4)+' XRP';
+    document.getElementById('botPnl').style.color = pnl>=0?'var(--green)':'var(--red)';
+    document.getElementById('botPosition').textContent = bot.position ? '🟢 IN POSITION' : '⚪ Flat';
+
+    const syncTime = syncTs ? syncTs.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) : '—';
+    document.getElementById('activityFeed').innerHTML = `
+      <div class="activity-item"><span class="at">now</span><span style="color:var(--muted)">Data synced at ${syncTime}</span></div>
+      <div class="activity-item"><span class="at"></span><span>XRP: ${bot.xrp || '—'} | RICO: ${bot.rico ? parseInt(bot.rico).toLocaleString() : '—'}</span></div>
+      <div class="activity-item"><span class="at"></span><span>Trades: ${bot.trades||0} | PnL: ${(pnl>=0?'+':'')+pnl.toFixed(4)} XRP</span></div>
+      <div class="activity-item"><span class="at"></span><span>Position: ${bot.position ? '🟢 IN' : '⚪ Flat'}</span></div>
+      <div class="activity-item" style="margin-top:8px"><span class="at"></span><span style="color:var(--muted);font-size:0.9em">Last log: ${lastTs ? lastTs.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) : '—'}</span></div>`;
   } catch(e) {
-    // Try local
-    try {
-      const r2 = await fetch('rico-log.txt?t='+Date.now());
-      const text = await r2.text();
-      parseBotLog(text);
-    } catch(e2) {
-      document.getElementById('botStatusText').textContent = 'Log unavailable';
-      document.getElementById('botDot').className = 'bot-dot off';
-      document.getElementById('botBadge').textContent = 'UNKNOWN';
-      document.getElementById('botBadge').className = 'badge by';
-    }
+    document.getElementById('botStatusText').textContent = 'Sync pending...';
+    document.getElementById('botDot').className = 'bot-dot off';
   }
-}
-
-function parseBotLog(text) {
-  const lines = text.trim().split('\n').filter(Boolean);
-  const last = lines[lines.length-1]||'';
-  const tsMatch = last.match(/\[(.+?)\]/);
-  const lastTs = tsMatch ? new Date(tsMatch[1]) : null;
-  const isRunning = lastTs && (Date.now()-lastTs.getTime()) < 120000;
-
-  document.getElementById('botDot').className = 'bot-dot '+(isRunning?'on':'off');
-  document.getElementById('botBadge').textContent = isRunning?'RUNNING':'STOPPED';
-  document.getElementById('botBadge').className = 'badge '+(isRunning?'bge':'br');
-  document.getElementById('botStatusText').textContent = isRunning?'Active — scanning for dips':'⚠️ Process stopped';
-  document.getElementById('botStatusText').style.color = isRunning?'var(--green)':'var(--red)';
-
-  const priceMatch = last.match(/Price: ([\d.]+) XRP\/RICO/);
-  if (priceMatch) document.getElementById('botLastPrice').textContent = parseFloat(priceMatch[1]).toFixed(10)+' XRP';
-
-  const last10 = lines.slice(-10).reverse();
-  document.getElementById('activityFeed').innerHTML = last10.map(line=>{
-    const tm = line.match(/\[(.+?)\]/);
-    const msg = line.replace(/\[.+?\]\s*/,'');
-    const time = tm ? new Date(tm[1]).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'}) : '';
-    const color = msg.includes('BUY')?'var(--green)':msg.includes('SELL')?'var(--accent)':msg.includes('ERROR')||msg.includes('FATAL')?'var(--red)':'var(--text)';
-    return `<div class="activity-item"><span class="at">${time}</span><span style="color:${color}">${msg.slice(0,75)}</span></div>`;
-  }).join('');
 }
 
 async function loadBotState() {
-  try {
-    const r = await fetch('rico-state.json?t='+Date.now());
-    const s = await r.json();
-    document.getElementById('botTrades').textContent = s.trades||0;
-    const pnl = s.totalPnlXrp||0;
-    document.getElementById('botPnl').textContent = (pnl>=0?'+':'')+pnl.toFixed(4)+' XRP';
-    document.getElementById('botPnl').style.color = pnl>=0?'var(--green)':'var(--red)';
-    document.getElementById('botPosition').textContent = s.position?'🟢 IN POSITION':'⚪ Flat';
-  } catch(e) {
-    document.getElementById('botTrades').textContent = '0';
-    document.getElementById('botPnl').textContent = '—';
-  }
+  // Bot state now included in axiom-data.json via loadBotLog()
 }
 
 async function loadHolders() {

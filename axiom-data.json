@@ -1,25 +1,25 @@
 {
-  "updated": "2026-03-14T22:01:32.622Z",
+  "updated": "2026-03-14T22:06:32.933Z",
   "stats": {
     "totalPredictions": 9,
-    "resolvedMarkets": 6,
-    "openMarkets": 3,
+    "resolvedMarkets": 7,
+    "openMarkets": 2,
     "unclaimedMarkets": 0,
     "unclaimedPayoutUsd": "0.00",
     "unclaimedPnlUsd": "0.00",
-    "leaderboardRank": 68,
-    "pnlUsd": 2.033406577751065,
-    "pnlPercent": 26.547824853863652,
-    "volumeUsd": 7.659409345,
-    "winRate": 83.33333333333334,
-    "tradeCount": 6
+    "leaderboardRank": 92,
+    "pnlUsd": -0.7560380422489348,
+    "pnlPercent": -7.235607319055251,
+    "volumeUsd": 10.448853965,
+    "winRate": 71.42857142857143,
+    "tradeCount": 7
   },
   "bets": [
     {
       "marketId": "btc-hourly-price-prediction",
       "marketAddress": "0x5E47ACb942ee65b8A73Fb58115D9F26ECeA0BEa3",
       "title": "Bitcoin Higher or Lower than $70,818.28 on March 14, 2026?",
-      "status": "open",
+      "status": "lost",
       "outcomeIndex": 0,
       "outcomeLabel": "Higher",
       "amountUsd": "2.78944462",
@@ -127,7 +127,7 @@
   "base": {
     "ethBalance": 0.001496378715051031,
     "usdcBalance": 3.115829,
-    "ethPrice": 2083.07826055555,
+    "ethPrice": 2083.078336594575,
     "trades": 0,
     "totalPnlEth": 0,
     "position": false,

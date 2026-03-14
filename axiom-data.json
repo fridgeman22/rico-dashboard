@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-14T22:16:33.053Z",
+  "updated": "2026-03-14T22:21:32.905Z",
   "stats": {
     "totalPredictions": 9,
     "resolvedMarkets": 7,
@@ -127,7 +127,7 @@
   "base": {
     "ethBalance": 0.001496378715051031,
     "usdcBalance": 3.115829,
-    "ethPrice": 2083.104149549376,
+    "ethPrice": 2083.1043016283725,
     "trades": 0,
     "totalPnlEth": 0,
     "position": false,

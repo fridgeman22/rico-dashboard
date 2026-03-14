@@ -631,8 +631,8 @@ async function loadBotLog() {
 
     const lastTs = bot.lastLog ? new Date(bot.lastLog) : null;
     const syncTs = data.updated ? new Date(data.updated) : null;
-    // Bot is running if last log was within 3 minutes of the sync time
-    const isRunning = lastTs && syncTs && (syncTs.getTime() - lastTs.getTime()) < 180000;
+    // Bot is running if last log was within 10 minutes of the sync time
+    const isRunning = lastTs && syncTs && (syncTs.getTime() - lastTs.getTime()) < 600000;
 
     document.getElementById('botDot').className = 'bot-dot '+(isRunning?'on':'off');
     document.getElementById('botBadge').textContent = isRunning?'RUNNING':'STOPPED';
@@ -676,7 +676,7 @@ function loadBaseStatus(data) {
   const base = data.base || {};
   const syncTs = data.updated ? new Date(data.updated) : null;
   const lastTs = base.lastLog ? new Date(base.lastLog) : null;
-  const isRunning = lastTs && syncTs && (syncTs.getTime() - lastTs.getTime()) < 180000;
+  const isRunning = lastTs && syncTs && (syncTs.getTime() - lastTs.getTime()) < 600000;
 
   const ethBal = base.ethBalance || 0;
   const usdcBal = base.usdcBalance || 0;

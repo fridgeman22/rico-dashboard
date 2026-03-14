@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-14T22:27:46.672Z",
+  "updated": "2026-03-14T22:29:20.128Z",
   "stats": {
     "totalPredictions": 9,
     "resolvedMarkets": 7,
@@ -121,13 +121,18 @@
     }
   ],
   "bot": {
-    "lastLog": null,
-    "error": "ENOENT: no such file or directory, open 'C:\\Users\\Admin\\.openclaw\\workspace\\UsersAdmin.openclawworkspace\trading\rico-log.txt'"
+    "lastLog": "2026-03-14T22:29:10.207Z",
+    "price": "0.0000005397",
+    "xrp": "37.6617",
+    "rico": "99570354",
+    "trades": 0,
+    "totalPnlXrp": 0,
+    "position": false
   },
   "base": {
     "ethBalance": 0.001496378715051031,
     "usdcBalance": 3.115829,
-    "ethPrice": 2083.104377667873,
+    "ethPrice": 2083.1044156876237,
     "trades": 0,
     "totalPnlEth": 0,
     "position": false,

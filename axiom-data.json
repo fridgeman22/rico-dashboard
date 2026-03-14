@@ -1,12 +1,12 @@
 {
-  "updated": "2026-03-14T00:54:52.648Z",
+  "updated": "2026-03-14T00:59:52.789Z",
   "stats": {
-    "totalPredictions": 6,
+    "totalPredictions": 8,
     "resolvedMarkets": 6,
-    "openMarkets": 0,
-    "unclaimedMarkets": 2,
-    "unclaimedPayoutUsd": "3.98",
-    "unclaimedPnlUsd": "1.17",
+    "openMarkets": 2,
+    "unclaimedMarkets": 0,
+    "unclaimedPayoutUsd": "0.00",
+    "unclaimedPnlUsd": "0.00",
     "leaderboardRank": 68,
     "pnlUsd": 2.033406577751065,
     "pnlPercent": 26.547824853863652,
@@ -15,6 +15,32 @@
     "tradeCount": 6
   },
   "bets": [
+    {
+      "marketId": "eth-price-prediction",
+      "marketAddress": "0xC53557BCeB8D46Cd3754592235688ff58aAe708C",
+      "title": "Ethereum Higher or Lower than $2,092.890 on March 14, 2026?",
+      "status": "open",
+      "outcomeIndex": 0,
+      "outcomeLabel": "Higher",
+      "amountUsd": "2.091997515",
+      "shares": "3.972763",
+      "createdAt": "2026-03-14T00:57:53.087Z",
+      "instanceDate": "2026-03-14",
+      "category": "daily"
+    },
+    {
+      "marketId": "btc-price-prediction",
+      "marketAddress": "0x94DBaee70BC224091e08601743279EE4473B4e71",
+      "title": "Bitcoin Higher or Lower than $70,944.41 on March 14, 2026?",
+      "status": "open",
+      "outcomeIndex": 0,
+      "outcomeLabel": "Higher",
+      "amountUsd": "2.091997515",
+      "shares": "3.978606",
+      "createdAt": "2026-03-14T00:57:43.079Z",
+      "instanceDate": "2026-03-14",
+      "category": "daily"
+    },
     {
       "marketId": "eth-price-prediction",
       "marketAddress": "0x87b44Dcf22FD432e3EdEa39ac90B8760F4271469",
@@ -95,10 +121,10 @@
     }
   ],
   "bot": {
-    "lastLog": "2026-03-14T00:37:34.859Z",
-    "price": "0.0000005331",
-    "xrp": "40.6225",
-    "rico": "98260002",
+    "lastLog": "2026-03-14T00:59:30.475Z",
+    "price": "0.0000005397",
+    "xrp": "39.6766",
+    "rico": "99570354",
     "trades": 0,
     "totalPnlXrp": 0,
     "position": false
@@ -112,7 +138,7 @@
     "position": true,
     "entryPrice": 2084.254817295288,
     "usdcHeld": 1.039,
-    "lastLog": "2026-03-14T00:54:51.543Z",
-    "lastEntry": "State loaded: 0 trades, PnL: 0.000000 ETH"
+    "lastLog": "2026-03-14T00:59:25.977Z",
+    "lastEntry": "Holding | Entry: $2084.25 | Current: $2089.23 | PnL: 0.24%"
   }
 }

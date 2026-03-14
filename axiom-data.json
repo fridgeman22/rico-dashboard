@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-14T21:56:32.877Z",
+  "updated": "2026-03-14T22:01:32.622Z",
   "stats": {
     "totalPredictions": 9,
     "resolvedMarkets": 6,
@@ -125,9 +125,9 @@
     "error": "ENOENT: no such file or directory, open 'C:\\Users\\Admin\\.openclaw\\workspace\\UsersAdmin.openclawworkspace\trading\rico-log.txt'"
   },
   "base": {
-    "ethBalance": 0.00249868049258502,
-    "usdcBalance": 1.039,
-    "ethPrice": 2083.079730449914,
+    "ethBalance": 0.001496378715051031,
+    "usdcBalance": 3.115829,
+    "ethPrice": 2083.07826055555,
     "trades": 0,
     "totalPnlEth": 0,
     "position": false,

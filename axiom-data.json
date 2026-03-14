@@ -1,9 +1,9 @@
 {
-  "updated": "2026-03-14T01:19:53.030Z",
+  "updated": "2026-03-14T21:56:32.877Z",
   "stats": {
-    "totalPredictions": 8,
+    "totalPredictions": 9,
     "resolvedMarkets": 6,
-    "openMarkets": 2,
+    "openMarkets": 3,
     "unclaimedMarkets": 0,
     "unclaimedPayoutUsd": "0.00",
     "unclaimedPnlUsd": "0.00",
@@ -15,6 +15,19 @@
     "tradeCount": 6
   },
   "bets": [
+    {
+      "marketId": "btc-hourly-price-prediction",
+      "marketAddress": "0x5E47ACb942ee65b8A73Fb58115D9F26ECeA0BEa3",
+      "title": "Bitcoin Higher or Lower than $70,818.28 on March 14, 2026?",
+      "status": "open",
+      "outcomeIndex": 0,
+      "outcomeLabel": "Higher",
+      "amountUsd": "2.78944462",
+      "shares": "4.458777",
+      "createdAt": "2026-03-14T21:44:13.081Z",
+      "instanceDate": "2026-03-14-21",
+      "category": "hourly"
+    },
     {
       "marketId": "eth-price-prediction",
       "marketAddress": "0xC53557BCeB8D46Cd3754592235688ff58aAe708C",
@@ -105,40 +118,22 @@
       "createdAt": "2026-03-11T13:53:23.078Z",
       "instanceDate": "2026-03-11",
       "category": "daily"
-    },
-    {
-      "marketId": "xrp-price-prediction",
-      "marketAddress": "0xc3f6BFE058bf45354d1C699BC7280C28aD619C15",
-      "title": "XRP Higher or Lower than $1.387 on March 11, 2026?",
-      "status": "lost",
-      "outcomeIndex": 0,
-      "outcomeLabel": "Higher",
-      "amountUsd": "1.38867708",
-      "shares": "2.18276",
-      "createdAt": "2026-03-11T13:53:13.083Z",
-      "instanceDate": "2026-03-11",
-      "category": "daily"
     }
   ],
   "bot": {
-    "lastLog": "2026-03-14T01:19:33.902Z",
-    "price": "0.0000005397",
-    "xrp": "39.6766",
-    "rico": "99570354",
-    "trades": 0,
-    "totalPnlXrp": 0,
-    "position": false
+    "lastLog": null,
+    "error": "ENOENT: no such file or directory, open 'C:\\Users\\Admin\\.openclaw\\workspace\\UsersAdmin.openclawworkspace\trading\rico-log.txt'"
   },
   "base": {
     "ethBalance": 0.00249868049258502,
     "usdcBalance": 1.039,
-    "ethPrice": 2089.3498200232016,
+    "ethPrice": 2083.079730449914,
     "trades": 0,
     "totalPnlEth": 0,
-    "position": true,
-    "entryPrice": 2084.254817295288,
-    "usdcHeld": 1.039,
-    "lastLog": "2026-03-14T01:19:43.464Z",
-    "lastEntry": "Holding | Entry: $2084.25 | Current: $2089.35 | PnL: 0.24%"
+    "position": false,
+    "entryPrice": 0,
+    "usdcHeld": 0,
+    "lastLog": null,
+    "lastEntry": null
   }
 }

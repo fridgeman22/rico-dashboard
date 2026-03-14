@@ -1,25 +1,25 @@
 {
-  "updated": "2026-03-14T00:26:03.955Z",
+  "updated": "2026-03-14T00:31:04.698Z",
   "stats": {
     "totalPredictions": 6,
-    "resolvedMarkets": 4,
-    "openMarkets": 2,
-    "unclaimedMarkets": 0,
-    "unclaimedPayoutUsd": "0.00",
-    "unclaimedPnlUsd": "0.00",
-    "leaderboardRank": 74,
-    "pnlUsd": 0.8657160009337851,
-    "pnlPercent": 17.85701673937285,
-    "volumeUsd": 4.848043845,
-    "winRate": 75,
-    "tradeCount": 4
+    "resolvedMarkets": 6,
+    "openMarkets": 0,
+    "unclaimedMarkets": 2,
+    "unclaimedPayoutUsd": "3.98",
+    "unclaimedPnlUsd": "1.17",
+    "leaderboardRank": 68,
+    "pnlUsd": 2.033406577751065,
+    "pnlPercent": 26.547824853863652,
+    "volumeUsd": 7.659409345,
+    "winRate": 83.33333333333334,
+    "tradeCount": 6
   },
   "bets": [
     {
       "marketId": "eth-price-prediction",
       "marketAddress": "0x87b44Dcf22FD432e3EdEa39ac90B8760F4271469",
       "title": "Ethereum Higher or Lower than $2,073.690 on March 13, 2026?",
-      "status": "open",
+      "status": "won",
       "outcomeIndex": 0,
       "outcomeLabel": "Higher",
       "amountUsd": "1.40568275",
@@ -32,7 +32,7 @@
       "marketId": "btc-price-prediction",
       "marketAddress": "0x0e495489ddA506fF63dF314054AB4b1f99D0E84d",
       "title": "Bitcoin Higher or Lower than $70,537.02 on March 13, 2026?",
-      "status": "open",
+      "status": "won",
       "outcomeIndex": 0,
       "outcomeLabel": "Higher",
       "amountUsd": "1.40568275",
@@ -95,7 +95,7 @@
     }
   ],
   "bot": {
-    "lastLog": "2026-03-14T00:25:57.386Z",
+    "lastLog": "2026-03-14T00:30:54.544Z",
     "price": "0.0000005331",
     "xrp": "40.6225",
     "rico": "98260002",
@@ -112,7 +112,7 @@
     "position": true,
     "entryPrice": 2084.254817295288,
     "usdcHeld": 1.039,
-    "lastLog": "2026-03-14T00:25:45.822Z",
+    "lastLog": "2026-03-14T00:30:50.209Z",
     "lastEntry": "Holding | Entry: $2084.25 | Current: $2089.26 | PnL: 0.24%"
   }
 }

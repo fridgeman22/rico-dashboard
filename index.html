@@ -98,6 +98,24 @@
     .ub-left { font-size:0.85em; color:var(--green); }
     .ub-val { font-size:1.4em; font-weight:700; font-family:var(--mono); color:var(--green); }
 
+    /* Wallet addresses */
+    .addr-bar { background:var(--bg2); border:1px solid var(--border); border-radius:10px; padding:14px 20px; margin-bottom:16px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .addr-item { display:flex; flex-direction:column; gap:4px; }
+    .addr-label { font-size:0.7em; color:var(--muted); text-transform:uppercase; letter-spacing:1.2px; }
+    .addr-val { font-family:var(--mono); font-size:0.78em; color:var(--accent2); cursor:pointer; padding:6px 10px; background:var(--bg3); border:1px solid var(--border); border-radius:6px; transition:all 0.15s; word-break:break-all; }
+    .addr-val:hover { border-color:var(--accent2); }
+    .addr-copied { color:var(--green) !important; border-color:var(--green) !important; }
+
+    /* Sparkline chart */
+    .chart-wrap { margin-top:10px; }
+    .chart-tabs { display:flex; gap:8px; margin-bottom:8px; }
+    .chart-tab { font-size:0.72em; padding:3px 10px; border-radius:20px; border:1px solid var(--border2); cursor:pointer; font-family:var(--mono); color:var(--muted); background:transparent; }
+    .chart-tab.active { background:var(--accent); color:#fff; border-color:var(--accent); }
+    canvas#sparkline { width:100%; height:55px; display:block; }
+    .hero-change { font-size:0.85em; font-family:var(--mono); margin-top:4px; }
+
+    @media(max-width:600px){ .addr-bar{grid-template-columns:1fr} }
+
     @media(max-width:900px){ .g4,.g3{grid-template-columns:1fr 1fr} .hero{flex-direction:column} }
     @media(max-width:600px){ .g4,.g3,.g2{grid-template-columns:1fr} .main{padding:16px} .header{padding:14px 16px} }
   </style>
@@ -120,12 +138,32 @@
 
 <div class="main">
 
+  <!-- WALLET ADDRESSES -->
+  <div class="addr-bar">
+    <div class="addr-item">
+      <div class="addr-label">⚡ EVM Wallet (XRPL EVM + Base)</div>
+      <div class="addr-val" id="addrEVM" onclick="copyAddr('addrEVM','0xb117Ea77f4dE891122180BcaEd89d99DeD4A8f90')" title="Click to copy">0xb117Ea77f4dE891122180BcaEd89d99DeD4A8f90</div>
+    </div>
+    <div class="addr-item">
+      <div class="addr-label">🌊 XRPL Native Wallet (L1)</div>
+      <div class="addr-val" id="addrXRPL" onclick="copyAddr('addrXRPL','rwVYdq235FF1QpEBLfhwnfQLvSPRRTm1Ez')" title="Click to copy">rwVYdq235FF1QpEBLfhwnfQLvSPRRTm1Ez</div>
+    </div>
+  </div>
+
   <!-- HERO -->
   <div class="hero">
-    <div>
+    <div style="flex:1;min-width:260px">
       <div class="hero-label">Total Portfolio Value</div>
       <div class="hero-value" id="netWorth">Loading...</div>
+      <div class="hero-change" id="heroChange" style="color:var(--muted)">—</div>
       <div class="hero-sub" id="lastUpdated">Fetching data...</div>
+      <div class="chart-wrap">
+        <div class="chart-tabs">
+          <button class="chart-tab active" onclick="setChartFrame('1h',this)">1H</button>
+          <button class="chart-tab" onclick="setChartFrame('24h',this)">24H</button>
+        </div>
+        <canvas id="sparkline" width="600" height="55"></canvas>
+      </div>
     </div>
     <div class="hero-stats">
       <div class="hero-stat">
@@ -137,11 +175,19 @@
         <div class="hs-val" id="ricoPrice" style="color:var(--accent)">—</div>
       </div>
       <div class="hero-stat">
+        <div class="hs-label">24H Change</div>
+        <div class="hs-val" id="change24h">—</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hs-label">1H Change</div>
+        <div class="hs-val" id="change1h">—</div>
+      </div>
+      <div class="hero-stat">
         <div class="hs-label">Axiom Rank</div>
         <div class="hs-val" id="axiomRank" style="color:var(--gold)">—</div>
       </div>
       <div class="hero-stat">
-        <div class="hs-label">All-time P&L</div>
+        <div class="hs-label">Axiom P&L</div>
         <div class="hs-val" id="axiomPnl" style="color:var(--green)">—</div>
       </div>
     </div>
@@ -289,6 +335,123 @@
 </div>
 
 <script>
+// Portfolio history for sparkline & change tracking
+const HISTORY_KEY = 'rico_portfolio_history';
+const MAX_HISTORY = 288; // 24h at 5min intervals
+let portfolioHistory = [];
+let chartFrame = '1h';
+
+function loadHistory() {
+  try { portfolioHistory = JSON.parse(localStorage.getItem(HISTORY_KEY) || '[]'); } catch(e) { portfolioHistory = []; }
+}
+
+function saveHistory(value) {
+  portfolioHistory.push({ t: Date.now(), v: value });
+  if (portfolioHistory.length > MAX_HISTORY) portfolioHistory = portfolioHistory.slice(-MAX_HISTORY);
+  localStorage.setItem(HISTORY_KEY, JSON.stringify(portfolioHistory));
+}
+
+function getFrameData(frameKey) {
+  const now = Date.now();
+  const ms = frameKey === '1h' ? 3600000 : 86400000;
+  return portfolioHistory.filter(p => (now - p.t) <= ms);
+}
+
+function setChartFrame(frame, btn) {
+  chartFrame = frame;
+  document.querySelectorAll('.chart-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  drawChart();
+  updateChanges();
+}
+
+function drawChart() {
+  const canvas = document.getElementById('sparkline');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const W = canvas.offsetWidth || 600, H = 55;
+  canvas.width = W; canvas.height = H;
+  ctx.clearRect(0, 0, W, H);
+
+  const data = getFrameData(chartFrame);
+  if (data.length < 2) {
+    ctx.fillStyle = '#333';
+    ctx.font = '11px monospace';
+    ctx.fillText('Collecting data...', 10, H/2+4);
+    return;
+  }
+
+  const vals = data.map(d => d.v);
+  const min = Math.min(...vals), max = Math.max(...vals);
+  const range = max - min || 1;
+
+  const points = data.map((d, i) => ({
+    x: (i / (data.length - 1)) * W,
+    y: H - 6 - ((d.v - min) / range) * (H - 12),
+  }));
+
+  const isUp = vals[vals.length-1] >= vals[0];
+  const color = isUp ? '#00e87a' : '#ff4466';
+
+  // Fill
+  ctx.beginPath();
+  ctx.moveTo(points[0].x, H);
+  points.forEach(p => ctx.lineTo(p.x, p.y));
+  ctx.lineTo(points[points.length-1].x, H);
+  ctx.closePath();
+  const grad = ctx.createLinearGradient(0,0,0,H);
+  grad.addColorStop(0, isUp ? 'rgba(0,232,122,0.2)' : 'rgba(255,68,102,0.2)');
+  grad.addColorStop(1, 'rgba(0,0,0,0)');
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Line
+  ctx.beginPath();
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 1.5;
+  points.forEach((p,i) => i===0 ? ctx.moveTo(p.x,p.y) : ctx.lineTo(p.x,p.y));
+  ctx.stroke();
+}
+
+function updateChanges() {
+  const data1h = getFrameData('1h');
+  const data24h = getFrameData('24h');
+  const current = portfolioHistory.length ? portfolioHistory[portfolioHistory.length-1].v : null;
+
+  if (current && data1h.length > 1) {
+    const old = data1h[0].v;
+    const diff = current - old;
+    const pct = (diff / old * 100).toFixed(2);
+    const el = document.getElementById('change1h');
+    el.textContent = (diff>=0?'+':'')+'$'+diff.toFixed(2)+' ('+pct+'%)';
+    el.style.color = diff>=0?'var(--green)':'var(--red)';
+  }
+
+  if (current && data24h.length > 1) {
+    const old = data24h[0].v;
+    const diff = current - old;
+    const pct = (diff / old * 100).toFixed(2);
+    const el = document.getElementById('change24h');
+    el.textContent = (diff>=0?'+':'')+'$'+diff.toFixed(2)+' ('+pct+'%)';
+    el.style.color = diff>=0?'var(--green)':'var(--red)';
+    const hc = document.getElementById('heroChange');
+    hc.textContent = '24h: '+(diff>=0?'+':'')+'$'+diff.toFixed(2)+' ('+pct+'%)';
+    hc.style.color = diff>=0?'var(--green)':'var(--red)';
+  }
+}
+
+function copyAddr(id, addr) {
+  navigator.clipboard.writeText(addr).then(() => {
+    const el = document.getElementById(id);
+    el.classList.add('addr-copied');
+    el.textContent = '✅ Copied!';
+    setTimeout(() => {
+      el.classList.remove('addr-copied');
+      el.textContent = addr;
+    }, 1500);
+  });
+}
+
 const RPC = 'https://rpc.xrplevm.org';
 const WALLET = '0xb117Ea77f4dE891122180BcaEd89d99DeD4A8f90';
 const RICO = '0xFA845BeD1F44f2be502eB4b6d365027caa0F2aAf';
@@ -559,8 +722,15 @@ async function loadAll() {
   const total = (evmUSD||0) + (xrplUSD||0) + (baseUSD||0);
   document.getElementById('netWorth').textContent = '$'+total.toFixed(2);
   document.getElementById('lastUpdated').textContent = 'Last updated: '+new Date().toLocaleTimeString();
+
+  if (total > 0) {
+    saveHistory(total);
+    drawChart();
+    updateChanges();
+  }
 }
 
+loadHistory();
 loadAll();
 setInterval(loadAll, 60000);
 </script>

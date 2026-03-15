@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-15T17:20:18.528Z",
+  "updated": "2026-03-15T17:21:25.734Z",
   "stats": {
     "totalPredictions": 9,
     "resolvedMarkets": 9,
@@ -121,7 +121,7 @@
     }
   ],
   "bot": {
-    "lastLog": "2026-03-15T17:19:56.093Z",
+    "lastLog": "2026-03-15T17:20:58.132Z",
     "price": "0.0000005489",
     "xrp": "37.1514",
     "rico": "101365448",
@@ -130,6 +130,15 @@
     "position": false
   },
   "base": {
-    "error": "could not coalesce error (error={ \"code\": -32011, \"message\": \"no backend is currently healthy to serve traffic\" }, payload={ \"id\": 2, \"jsonrpc\": \"2.0\", \"method\": \"eth_getBalance\", \"params\": [ \"0xb117ea77f4de891122180bcaed89d99ded4a8f90\", \"latest\" ] }, code=UNKNOWN_ERROR, version=6.16.0)"
+    "ethBalance": 0.002461487201909265,
+    "usdcBalance": 1.043302,
+    "ethPrice": 2092.5348615014104,
+    "trades": 1,
+    "totalPnlEth": 0.00146657209431258,
+    "position": false,
+    "entryPrice": 0,
+    "usdcHeld": 0,
+    "lastLog": "2026-03-15T17:21:22.480Z",
+    "lastEntry": "No signal — waiting for dip (need -0.5%)"
   }
 }

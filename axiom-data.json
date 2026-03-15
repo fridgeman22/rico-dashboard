@@ -1,12 +1,12 @@
 {
-  "updated": "2026-03-15T11:43:32.111Z",
+  "updated": "2026-03-15T11:48:23.164Z",
   "stats": {
     "totalPredictions": 9,
     "resolvedMarkets": 9,
     "openMarkets": 0,
-    "unclaimedMarkets": 1,
-    "unclaimedPayoutUsd": "6.35",
-    "unclaimedPnlUsd": "4.25",
+    "unclaimedMarkets": 0,
+    "unclaimedPayoutUsd": "0.00",
+    "unclaimedPnlUsd": "0.00",
     "leaderboardRank": 58,
     "pnlUsd": 6.9755454454281836,
     "pnlPercent": 47.6704532918484,
@@ -121,9 +121,9 @@
     }
   ],
   "bot": {
-    "lastLog": "2026-03-15T11:43:16.842Z",
+    "lastLog": "2026-03-15T11:47:56.276Z",
     "price": "0.0000005489",
-    "xrp": "40.1145",
+    "xrp": "44.5852",
     "rico": "101365448",
     "trades": 0,
     "totalPnlXrp": 0,
@@ -132,16 +132,13 @@
   "base": {
     "ethBalance": 0.002962950809363611,
     "usdcBalance": 0,
-    "ethPrice": 2115.920460412154,
+    "ethPrice": 2115.920575367455,
     "trades": 1,
     "totalPnlEth": 0.00146657209431258,
     "position": false,
     "entryPrice": 0,
     "usdcHeld": 0,
-    "lastLog": "2026-03-15T11:43:19.264Z",
-    "lastEntry": "Building price history (1/10)..."
-  },
-  "lastClaimed": [
-    "0xC53557BCeB8D46Cd3754592235688ff58aAe708C"
-  ]
+    "lastLog": "2026-03-15T11:47:53.825Z",
+    "lastEntry": "No signal — waiting for dip (need -0.5%)"
+  }
 }

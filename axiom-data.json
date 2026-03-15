@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-15T01:22:22.310Z",
+  "updated": "2026-03-15T01:26:43.409Z",
   "stats": {
     "totalPredictions": 9,
     "resolvedMarkets": 8,
@@ -121,9 +121,9 @@
     }
   ],
   "bot": {
-    "lastLog": "2026-03-15T01:21:14.975Z",
+    "lastLog": "2026-03-15T01:26:25.476Z",
     "price": "0.0000005397",
-    "xrp": "41.2458",
+    "xrp": "41.1633",
     "rico": "99570354",
     "trades": 0,
     "totalPnlXrp": 0,
@@ -132,21 +132,13 @@
   "base": {
     "ethBalance": 0.001496378715051031,
     "usdcBalance": 3.115829,
-    "ethPrice": 2089.5995596153766,
+    "ethPrice": 2089.5113949176107,
     "trades": 0,
     "totalPnlEth": 0,
     "position": true,
     "entryPrice": 2083.078976492645,
     "usdcHeld": 3.115829,
-    "lastLog": "2026-03-15T01:21:25.503Z",
-    "lastEntry": "Holding | Entry: $2083.08 | Current: $2089.60 | PnL: 0.31%"
-  },
-  "lastClaimed": [
-    "0x94DBaee70BC224091e08601743279EE4473B4e71",
-    "0x87b44Dcf22FD432e3EdEa39ac90B8760F4271469",
-    "0x0e495489ddA506fF63dF314054AB4b1f99D0E84d",
-    "0xab2c4Bf1Ab3174f7932074281754331001281592",
-    "0x1B4FBbAb98e84Dec557727fF585816df81bDd7bC",
-    "0x06Ea63b0d2FCc775ec2cDc70032Ea1dD39FF8036"
-  ]
+    "lastLog": "2026-03-15T01:26:30.291Z",
+    "lastEntry": "Holding | Entry: $2083.08 | Current: $2089.51 | PnL: 0.31%"
+  }
 }

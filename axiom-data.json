@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-15T20:06:57.061Z",
+  "updated": "2026-03-15T20:08:07.568Z",
   "stats": {},
   "bets": [],
   "bot": {
@@ -10,17 +10,5 @@
     "trades": 0,
     "totalPnlXrp": 0,
     "position": false
-  },
-  "base": {
-    "ethBalance": 0,
-    "usdcBalance": 0,
-    "ethPrice": 2108.5193114152207,
-    "trades": 1,
-    "totalPnlEth": 0.00146657209431258,
-    "position": false,
-    "entryPrice": 0,
-    "usdcHeld": 0,
-    "lastLog": "2026-03-15T18:32:03.137Z",
-    "lastEntry": "No signal — waiting for dip (need -0.5%)"
   }
 }

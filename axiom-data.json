@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-15T17:45:14.588Z",
+  "updated": "2026-03-15T17:46:25.495Z",
   "stats": {
     "totalPredictions": 9,
     "resolvedMarkets": 9,
@@ -121,7 +121,7 @@
     }
   ],
   "bot": {
-    "lastLog": "2026-03-15T17:44:47.178Z",
+    "lastLog": "2026-03-15T17:46:20.742Z",
     "price": "0.0000005489",
     "xrp": "37.1514",
     "rico": "101365448",
@@ -132,13 +132,13 @@
   "base": {
     "ethBalance": 0.002461487201909265,
     "usdcBalance": 1.043302,
-    "ethPrice": 2092.504335687786,
+    "ethPrice": 2093.006177706249,
     "trades": 1,
     "totalPnlEth": 0.00146657209431258,
     "position": false,
     "entryPrice": 0,
     "usdcHeld": 0,
-    "lastLog": "2026-03-15T17:44:46.040Z",
+    "lastLog": "2026-03-15T17:46:17.581Z",
     "lastEntry": "No signal — waiting for dip (need -0.5%)"
   }
 }

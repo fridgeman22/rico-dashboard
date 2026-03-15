@@ -1,18 +1,18 @@
 {
-  "updated": "2026-03-14T23:37:02.064Z",
+  "updated": "2026-03-15T00:32:45.430Z",
   "stats": {
     "totalPredictions": 9,
-    "resolvedMarkets": 7,
-    "openMarkets": 2,
-    "unclaimedMarkets": 0,
-    "unclaimedPayoutUsd": "0.00",
-    "unclaimedPnlUsd": "0.00",
-    "leaderboardRank": 92,
-    "pnlUsd": -0.7560380422489348,
-    "pnlPercent": -7.235607319055251,
-    "volumeUsd": 10.448853965,
-    "winRate": 71.42857142857143,
-    "tradeCount": 7
+    "resolvedMarkets": 8,
+    "openMarkets": 1,
+    "unclaimedMarkets": 1,
+    "unclaimedPayoutUsd": "5.57",
+    "unclaimedPnlUsd": "3.48",
+    "leaderboardRank": 64,
+    "pnlUsd": 2.7216073266799046,
+    "pnlPercent": 21.70193412321557,
+    "volumeUsd": 12.54085148,
+    "winRate": 75,
+    "tradeCount": 8
   },
   "bets": [
     {
@@ -45,7 +45,7 @@
       "marketId": "btc-price-prediction",
       "marketAddress": "0x94DBaee70BC224091e08601743279EE4473B4e71",
       "title": "Bitcoin Higher or Lower than $70,944.41 on March 14, 2026?",
-      "status": "open",
+      "status": "won",
       "outcomeIndex": 0,
       "outcomeLabel": "Higher",
       "amountUsd": "2.091997515",
@@ -121,7 +121,7 @@
     }
   ],
   "bot": {
-    "lastLog": "2026-03-14T23:04:54.392Z",
+    "lastLog": "2026-03-15T00:32:34.464Z",
     "price": "0.0000005397",
     "xrp": "37.6617",
     "rico": "99570354",
@@ -132,13 +132,13 @@
   "base": {
     "ethBalance": 0.001496378715051031,
     "usdcBalance": 3.115829,
-    "ethPrice": 2094.5644084828473,
+    "ethPrice": 2094.5610919452815,
     "trades": 0,
     "totalPnlEth": 0,
     "position": true,
     "entryPrice": 2083.078976492645,
     "usdcHeld": 3.115829,
-    "lastLog": "2026-03-14T23:04:47.465Z",
-    "lastEntry": "Holding | Entry: $2083.08 | Current: $2087.38 | PnL: 0.21%"
+    "lastLog": "2026-03-15T00:32:38.450Z",
+    "lastEntry": "Holding | Entry: $2083.08 | Current: $2094.56 | PnL: 0.55%"
   }
 }

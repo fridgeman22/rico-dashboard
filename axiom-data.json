@@ -1,21 +1,5 @@
 {
-  "updated": "2026-03-15T20:24:23.057Z",
+  "updated": "2026-03-15T20:27:38.729Z",
   "stats": {},
-  "bets": [],
-  "bot": {
-    "lastLog": null,
-    "error": "ENOENT: no such file or directory, open 'C:\\Users\\Admin\\.openclaw\\workspace\\trading\\rico-log.txt'"
-  },
-  "base": {
-    "ethBalance": 0,
-    "usdcBalance": 0,
-    "ethPrice": 2108.2006214940857,
-    "trades": 0,
-    "totalPnlEth": 0,
-    "position": false,
-    "entryPrice": 0,
-    "usdcHeld": 0,
-    "lastLog": null,
-    "lastEntry": null
-  }
+  "bets": []
 }

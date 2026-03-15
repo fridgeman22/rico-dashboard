@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-15T20:13:07.314Z",
+  "updated": "2026-03-15T20:14:22.929Z",
   "stats": {},
   "bets": [],
   "bot": {
@@ -10,5 +10,17 @@
     "trades": 0,
     "totalPnlXrp": 0,
     "position": false
+  },
+  "base": {
+    "ethBalance": 0,
+    "usdcBalance": 0,
+    "ethPrice": 2108.166305459581,
+    "trades": 0,
+    "totalPnlEth": 0,
+    "position": false,
+    "entryPrice": 0,
+    "usdcHeld": 0,
+    "lastLog": null,
+    "lastEntry": null
   }
 }

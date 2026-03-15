@@ -1,12 +1,12 @@
 {
-  "updated": "2026-03-15T01:12:45.461Z",
+  "updated": "2026-03-15T01:17:45.553Z",
   "stats": {
     "totalPredictions": 9,
     "resolvedMarkets": 8,
     "openMarkets": 1,
-    "unclaimedMarkets": 1,
-    "unclaimedPayoutUsd": "5.57",
-    "unclaimedPnlUsd": "3.48",
+    "unclaimedMarkets": 0,
+    "unclaimedPayoutUsd": "0.00",
+    "unclaimedPnlUsd": "0.00",
     "leaderboardRank": 64,
     "pnlUsd": 2.7216073266799046,
     "pnlPercent": 21.70193412321557,
@@ -121,9 +121,9 @@
     }
   ],
   "bot": {
-    "lastLog": "2026-03-15T01:12:26.791Z",
+    "lastLog": "2026-03-15T01:17:37.513Z",
     "price": "0.0000005397",
-    "xrp": "37.4555",
+    "xrp": "41.2458",
     "rico": "99570354",
     "trades": 0,
     "totalPnlXrp": 0,
@@ -132,13 +132,13 @@
   "base": {
     "ethBalance": 0.001496378715051031,
     "usdcBalance": 3.115829,
-    "ethPrice": 2089.549636300713,
+    "ethPrice": 2089.58279159161,
     "trades": 0,
     "totalPnlEth": 0,
     "position": true,
     "entryPrice": 2083.078976492645,
     "usdcHeld": 3.115829,
-    "lastLog": "2026-03-15T01:12:16.692Z",
-    "lastEntry": "Holding | Entry: $2083.08 | Current: $2089.55 | PnL: 0.31%"
+    "lastLog": "2026-03-15T01:17:21.640Z",
+    "lastEntry": "Holding | Entry: $2083.08 | Current: $2089.58 | PnL: 0.31%"
   }
 }

@@ -141,7 +141,7 @@
   <!-- WALLET ADDRESSES -->
   <div class="addr-bar">
     <div class="addr-item">
-      <div class="addr-label">⚡ EVM Wallet (XRPL EVM + Base)</div>
+      <div class="addr-label">⚡ EVM Wallet (XRPL EVM)</div>
       <div class="addr-val" id="addrEVM" onclick="copyAddr('addrEVM','0xdB19ce056F33Bca1cAAebBDf74efcB18A9A7FF27')" title="Click to copy">0xdB19ce056F33Bca1cAAebBDf74efcB18A9A7FF27</div>
     </div>
     <div class="addr-item">
@@ -269,41 +269,6 @@
       <div class="row"><span class="rl">Leaderboard</span><span class="rv" id="axiomLeader">—</span></div>
       <hr class="divider">
       <div id="axiomBets"><div class="loading">Loading bets...</div></div>
-    </div>
-
-  </div>
-
-  <!-- BASE TRADER ROW -->
-  <div class="grid g3" style="margin-bottom:16px">
-
-    <div class="card">
-      <div class="card-header"><div class="card-title">🔵 Base ETH</div><span class="badge bg">BASE CHAIN</span></div>
-      <div class="big-val" id="baseETH">—</div>
-      <div class="big-label">ETH Balance</div>
-      <div class="sub-val" id="baseETHusd" style="color:var(--accent2)">≈ $—</div>
-    </div>
-
-    <div class="card">
-      <div class="card-header"><div class="card-title">💵 USDC</div><span class="badge bge">BASE CHAIN</span></div>
-      <div class="big-val" id="baseUSDC">—</div>
-      <div class="big-label">USDC Balance</div>
-      <div class="sub-val" id="baseETHPrice" style="color:var(--muted)">ETH price: $—</div>
-    </div>
-
-    <div class="card">
-      <div class="card-header"><div class="card-title">⚙️ Base Bot</div><span class="badge bge" id="baseBotBadge">—</span></div>
-      <div class="bot-status">
-        <div class="bot-dot" id="baseBotDot"></div>
-        <span id="baseBotStatus" style="color:var(--muted)">Checking...</span>
-      </div>
-      <div class="row"><span class="rl">DEX</span><span class="rv">Aerodrome WETH/USDC</span></div>
-      <div class="row"><span class="rl">Trade Size</span><span class="rv">0.0005 ETH (~$1)</span></div>
-      <div class="row"><span class="rl">Target / Stop</span><span class="rv">+1.2% / -0.8%</span></div>
-      <hr class="divider">
-      <div class="row"><span class="rl">Trades</span><span class="rv" id="baseTrades">—</span></div>
-      <div class="row"><span class="rl">Total P&L</span><span class="rv" id="basePnl">—</span></div>
-      <div class="row"><span class="rl">Position</span><span class="rv" id="basePosition">—</span></div>
-      <div class="row"><span class="rl">Entry Price</span><span class="rv" id="baseEntry">—</span></div>
     </div>
 
   </div>
@@ -672,36 +637,7 @@ async function loadHolders() {
   } catch(e) {}
 }
 
-function loadBaseStatus(data) {
-  const base = data.base || {};
-  const syncTs = data.updated ? new Date(data.updated) : null;
-  const lastTs = base.lastLog ? new Date(base.lastLog) : null;
-  const isRunning = lastTs && syncTs && (syncTs.getTime() - lastTs.getTime()) < 600000;
 
-  const ethBal = base.ethBalance || 0;
-  const usdcBal = base.usdcBalance || 0;
-  const ethPrice = base.ethPrice || 0;
-
-  document.getElementById('baseETH').textContent = ethBal.toFixed(5);
-  document.getElementById('baseETHusd').textContent = '≈ $'+(ethBal * ethPrice).toFixed(2);
-  document.getElementById('baseUSDC').textContent = usdcBal.toFixed(2);
-  document.getElementById('baseETHPrice').textContent = 'ETH price: $'+(ethPrice.toFixed(2));
-
-  document.getElementById('baseBotDot').className = 'bot-dot '+(isRunning?'on':'off');
-  document.getElementById('baseBotBadge').textContent = isRunning?'RUNNING':'STOPPED';
-  document.getElementById('baseBotBadge').className = 'badge '+(isRunning?'bge':'br');
-  document.getElementById('baseBotStatus').textContent = isRunning ? 'Active — scalping WETH/USDC' : '⚠️ Process stopped';
-  document.getElementById('baseBotStatus').style.color = isRunning ? 'var(--green)' : 'var(--red)';
-
-  document.getElementById('baseTrades').textContent = base.trades || 0;
-  const pnl = base.totalPnlEth || 0;
-  document.getElementById('basePnl').textContent = (pnl>=0?'+':'')+pnl.toFixed(6)+' ETH';
-  document.getElementById('basePnl').style.color = pnl>=0?'var(--green)':'var(--red)';
-  document.getElementById('basePosition').textContent = base.position ? '🟢 IN POSITION' : '⚪ Flat';
-  document.getElementById('baseEntry').textContent = base.entryPrice ? '$'+base.entryPrice.toFixed(2) : '—';
-
-  return ethBal * ethPrice;
-}
 
 async function loadAll() {
   document.getElementById('lastUpdated').textContent = 'Refreshing...';
@@ -712,14 +648,14 @@ async function loadAll() {
 
   // Base data comes from axiom-data.json (loaded in loadAxiom/loadBotLog)
   // Re-fetch here to get base section
-  let baseUSD = 0;
+  
   try {
     const r = await fetch('axiom-data.json?t='+Date.now());
     const d = await r.json();
-    baseUSD = loadBaseStatus(d);
+    
   } catch(e) {}
 
-  const total = (evmUSD||0) + (xrplUSD||0) + (baseUSD||0);
+  const total = (evmUSD||0) + (xrplUSD||0);
   document.getElementById('netWorth').textContent = '$'+total.toFixed(2);
   document.getElementById('lastUpdated').textContent = 'Last updated: '+new Date().toLocaleTimeString();
 

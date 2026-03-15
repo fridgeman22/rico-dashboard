@@ -1,26 +1,5 @@
 {
-  "updated": "2026-03-15T20:19:23.166Z",
+  "updated": "2026-03-15T20:22:38.763Z",
   "stats": {},
-  "bets": [],
-  "bot": {
-    "lastLog": "2026-03-15T18:32:26.643Z",
-    "price": "0.0000005489",
-    "xrp": "37.1514",
-    "rico": "101365448",
-    "trades": 0,
-    "totalPnlXrp": 0,
-    "position": false
-  },
-  "base": {
-    "ethBalance": 0,
-    "usdcBalance": 0,
-    "ethPrice": 2108.166572144454,
-    "trades": 0,
-    "totalPnlEth": 0,
-    "position": false,
-    "entryPrice": 0,
-    "usdcHeld": 0,
-    "lastLog": null,
-    "lastEntry": null
-  }
+  "bets": []
 }

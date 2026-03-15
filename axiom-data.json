@@ -1,9 +1,5 @@
 {
-  "updated": "2026-03-15T20:33:07.479Z",
+  "updated": "2026-03-15T20:37:38.751Z",
   "stats": {},
-  "bets": [],
-  "bot": {
-    "lastLog": null,
-    "error": "ENOENT: no such file or directory, open 'C:\\Users\\Admin\\.openclaw\\workspace\\trading\\rico-log.txt'"
-  }
+  "bets": []
 }

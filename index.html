@@ -365,30 +365,38 @@ function drawChart() {
 }
 
 function updateChanges() {
-  const data1h = getFrameData('1h');
-  const data24h = getFrameData('24h');
-  const current = portfolioHistory.length ? portfolioHistory[portfolioHistory.length-1].v : null;
+  try {
+    const data1h = getFrameData('1h');
+    const data24h = getFrameData('24h');
+    const current = portfolioHistory.length ? portfolioHistory[portfolioHistory.length-1].v : null;
 
-  if (current && data1h.length > 1) {
-    const old = data1h[0].v;
-    const diff = current - old;
-    const pct = (diff / old * 100).toFixed(2);
-    const el = document.getElementById('change1h');
-    el.textContent = (diff>=0?'+':'')+'$'+diff.toFixed(2)+' ('+pct+'%)';
-    el.style.color = diff>=0?'var(--green)':'var(--red)';
-  }
+    if (current && data1h && data1h.length > 1) {
+      const old = data1h[0].v;
+      const diff = current - old;
+      const pct = old ? (diff / old * 100).toFixed(2) : '0.00';
+      const el = document.getElementById('change1h');
+      if (el) {
+        el.textContent = (diff>=0?'+':'')+'$'+diff.toFixed(2)+' ('+pct+'%)';
+        el.style.color = diff>=0?'var(--green)':'var(--red)';
+      }
+    }
 
-  if (current && data24h.length > 1) {
-    const old = data24h[0].v;
-    const diff = current - old;
-    const pct = (diff / old * 100).toFixed(2);
-    const el = document.getElementById('change24h');
-    el.textContent = (diff>=0?'+':'')+'$'+diff.toFixed(2)+' ('+pct+'%)';
-    el.style.color = diff>=0?'var(--green)':'var(--red)';
-    const hc = document.getElementById('heroChange');
-    hc.textContent = '24h: '+(diff>=0?'+':'')+'$'+diff.toFixed(2)+' ('+pct+'%)';
-    hc.style.color = diff>=0?'var(--green)':'var(--red)';
-  }
+    if (current && data24h && data24h.length > 1) {
+      const old = data24h[0].v;
+      const diff = current - old;
+      const pct = old ? (diff / old * 100).toFixed(2) : '0.00';
+      const el = document.getElementById('change24h');
+      if (el) {
+        el.textContent = (diff>=0?'+':'')+'$'+diff.toFixed(2)+' ('+pct+'%)';
+        el.style.color = diff>=0?'var(--green)':'var(--red)';
+      }
+      const hc = document.getElementById('heroChange');
+      if (hc) {
+        hc.textContent = '24h: '+(diff>=0?'+':'')+'$'+diff.toFixed(2)+' ('+pct+'%)';
+        hc.style.color = diff>=0?'var(--green)':'var(--red)';
+      }
+    }
+  } catch(e) { console.error("updateChanges error:", e); }
 }
 
 function copyAddr(id, addr) {

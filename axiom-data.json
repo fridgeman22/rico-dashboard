@@ -1,5 +1,18 @@
 {
-  "updated": "2026-03-17T00:04:29.943Z",
-  "stats": {},
+  "updated": "2026-03-17T00:09:30.304Z",
+  "stats": {
+    "totalPredictions": 0,
+    "resolvedMarkets": 0,
+    "openMarkets": 0,
+    "unclaimedMarkets": 0,
+    "unclaimedPayoutUsd": "0.00",
+    "unclaimedPnlUsd": "0.00",
+    "leaderboardRank": null,
+    "pnlUsd": 0,
+    "pnlPercent": 0,
+    "volumeUsd": 0,
+    "winRate": 0,
+    "tradeCount": 0
+  },
   "bets": []
 }

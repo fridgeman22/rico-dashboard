@@ -1,9 +1,9 @@
 {
-  "updated": "2026-03-17T19:01:42.143Z",
+  "updated": "2026-03-17T19:06:42.245Z",
   "stats": {
-    "totalPredictions": 0,
+    "totalPredictions": 4,
     "resolvedMarkets": 0,
-    "openMarkets": 0,
+    "openMarkets": 2,
     "unclaimedMarkets": 0,
     "unclaimedPayoutUsd": "0.00",
     "unclaimedPnlUsd": "0.00",
@@ -14,5 +14,58 @@
     "winRate": 0,
     "tradeCount": 0
   },
-  "bets": []
+  "bets": [
+    {
+      "marketId": "eth-price-prediction",
+      "marketAddress": "0x3D853CcF7a49e227FfdB6d18D7fD88C40283122f",
+      "title": "Ethereum Higher or Lower than $2,352.942 on March 17, 2026?",
+      "status": "open",
+      "outcomeIndex": 0,
+      "outcomeLabel": "Higher",
+      "amountUsd": "7.67824955",
+      "shares": "10.281642",
+      "createdAt": "2026-03-17T19:05:18.079Z",
+      "instanceDate": "2026-03-17",
+      "category": "daily"
+    },
+    {
+      "marketId": "btc-price-prediction",
+      "marketAddress": "0x16d33abec5aCFb83b42a489886f4Ac15E585f861",
+      "title": "Bitcoin Higher or Lower than $74,885.55 on March 17, 2026?",
+      "status": "open",
+      "outcomeIndex": 0,
+      "outcomeLabel": "Higher",
+      "amountUsd": "7.6777750000000005",
+      "shares": "10.28215",
+      "createdAt": "2026-03-17T19:05:08.084Z",
+      "instanceDate": "2026-03-17",
+      "category": "daily"
+    },
+    {
+      "marketId": "eth-price-prediction",
+      "marketAddress": "0x3D853CcF7a49e227FfdB6d18D7fD88C40283122f",
+      "title": "Ethereum Higher or Lower than $2,352.942 on March 17, 2026?",
+      "status": "open",
+      "outcomeIndex": 1,
+      "outcomeLabel": "Lower",
+      "amountUsd": "3.07641148",
+      "shares": "4.089647",
+      "createdAt": "2026-03-17T19:03:48.086Z",
+      "instanceDate": "2026-03-17",
+      "category": "daily"
+    },
+    {
+      "marketId": "btc-price-prediction",
+      "marketAddress": "0x16d33abec5aCFb83b42a489886f4Ac15E585f861",
+      "title": "Bitcoin Higher or Lower than $74,885.55 on March 17, 2026?",
+      "status": "open",
+      "outcomeIndex": 1,
+      "outcomeLabel": "Lower",
+      "amountUsd": "3.07641148",
+      "shares": "4.089958",
+      "createdAt": "2026-03-17T19:03:28.082Z",
+      "instanceDate": "2026-03-17",
+      "category": "daily"
+    }
+  ]
 }

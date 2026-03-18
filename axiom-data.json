@@ -1,9 +1,9 @@
 {
-  "updated": "2026-03-18T16:48:16.531Z",
+  "updated": "2026-03-18T16:53:16.483Z",
   "stats": {
-    "totalPredictions": 4,
+    "totalPredictions": 7,
     "resolvedMarkets": 2,
-    "openMarkets": 0,
+    "openMarkets": 3,
     "unclaimedMarkets": 0,
     "unclaimedPayoutUsd": "0.00",
     "unclaimedPnlUsd": "0.00",
@@ -15,6 +15,45 @@
     "tradeCount": 4
   },
   "bets": [
+    {
+      "marketId": "xrp-price-prediction",
+      "marketAddress": "0xd36CB6d8337f22EDE25Ba51b60053a37dbf0d6ed",
+      "title": "XRP Higher or Lower than $1.519 on March 18, 2026?",
+      "status": "open",
+      "outcomeIndex": 1,
+      "outcomeLabel": "Lower",
+      "amountUsd": "2.88848424",
+      "shares": "4.234701",
+      "createdAt": "2026-03-18T16:51:58.093Z",
+      "instanceDate": "2026-03-18",
+      "category": "daily"
+    },
+    {
+      "marketId": "eth-price-prediction",
+      "marketAddress": "0xF133ABAccdEF23594ddB8fe588f96E126d7a580B",
+      "title": "Ethereum Higher or Lower than $2,318.017 on March 18, 2026?",
+      "status": "open",
+      "outcomeIndex": 1,
+      "outcomeLabel": "Lower",
+      "amountUsd": "2.88848424",
+      "shares": "3.740676",
+      "createdAt": "2026-03-18T16:51:48.276Z",
+      "instanceDate": "2026-03-18",
+      "category": "daily"
+    },
+    {
+      "marketId": "btc-price-prediction",
+      "marketAddress": "0xA3cc2EDebd0cAc02528aF0Dc217717A3E623DDBD",
+      "title": "Bitcoin Higher or Lower than $73,929.44 on March 18, 2026?",
+      "status": "open",
+      "outcomeIndex": 1,
+      "outcomeLabel": "Lower",
+      "amountUsd": "2.88848424",
+      "shares": "4.22904",
+      "createdAt": "2026-03-18T16:51:38.089Z",
+      "instanceDate": "2026-03-18",
+      "category": "daily"
+    },
     {
       "marketId": "eth-price-prediction",
       "marketAddress": "0x3D853CcF7a49e227FfdB6d18D7fD88C40283122f",

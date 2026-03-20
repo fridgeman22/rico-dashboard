@@ -1,12 +1,12 @@
 {
-  "updated": "2026-03-20T16:30:36.897Z",
+  "updated": "2026-03-20T16:35:23.791Z",
   "stats": {
     "totalPredictions": 10,
     "resolvedMarkets": 8,
     "openMarkets": 0,
-    "unclaimedMarkets": 3,
-    "unclaimedPayoutUsd": "8.50",
-    "unclaimedPnlUsd": "-0.13",
+    "unclaimedMarkets": 0,
+    "unclaimedPayoutUsd": "0.00",
+    "unclaimedPnlUsd": "0.00",
     "leaderboardRank": 140,
     "pnlUsd": -9.150504262789866,
     "pnlPercent": -23.582653192668822,
@@ -119,10 +119,5 @@
       "instanceDate": "2026-03-17",
       "category": "daily"
     }
-  ],
-  "lastClaimed": [
-    "0xCD3a6A6dcf4502278D1375Fd333eAd1B641bc284",
-    "0x6D8647BCD760FEB971299E057DEFBcEC2009ec34",
-    "0x6E15fcAcaC9e867b2da168A0a9495744f6fEFB2d"
   ]
 }

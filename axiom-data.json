@@ -1,25 +1,25 @@
 {
-  "updated": "2026-03-19T23:59:51.634Z",
+  "updated": "2026-03-20T16:30:36.897Z",
   "stats": {
     "totalPredictions": 10,
-    "resolvedMarkets": 5,
-    "openMarkets": 3,
-    "unclaimedMarkets": 0,
-    "unclaimedPayoutUsd": "0.00",
-    "unclaimedPnlUsd": "0.00",
+    "resolvedMarkets": 8,
+    "openMarkets": 0,
+    "unclaimedMarkets": 3,
+    "unclaimedPayoutUsd": "8.50",
+    "unclaimedPnlUsd": "-0.13",
     "leaderboardRank": 140,
-    "pnlUsd": -9.019017329969865,
-    "pnlPercent": -29.88973153055243,
-    "volumeUsd": 30.174300230000004,
-    "winRate": 71.42857142857143,
-    "tradeCount": 7
+    "pnlUsd": -9.150504262789866,
+    "pnlPercent": -23.582653192668822,
+    "volumeUsd": 38.80184383,
+    "winRate": 80,
+    "tradeCount": 10
   },
   "bets": [
     {
       "marketId": "xrp-price-prediction",
       "marketAddress": "0xCD3a6A6dcf4502278D1375Fd333eAd1B641bc284",
       "title": "XRP Higher or Lower than $1.465 on March 19, 2026?",
-      "status": "open",
+      "status": "won",
       "outcomeIndex": 1,
       "outcomeLabel": "Lower",
       "amountUsd": "2.87583096",
@@ -32,7 +32,7 @@
       "marketId": "eth-price-prediction",
       "marketAddress": "0x6D8647BCD760FEB971299E057DEFBcEC2009ec34",
       "title": "Ethereum Higher or Lower than $2,203.428 on March 19, 2026?",
-      "status": "open",
+      "status": "won",
       "outcomeIndex": 1,
       "outcomeLabel": "Lower",
       "amountUsd": "2.87583096",
@@ -45,7 +45,7 @@
       "marketId": "btc-price-prediction",
       "marketAddress": "0x6E15fcAcaC9e867b2da168A0a9495744f6fEFB2d",
       "title": "Bitcoin Higher or Lower than $71,251.47 on March 19, 2026?",
-      "status": "open",
+      "status": "won",
       "outcomeIndex": 1,
       "outcomeLabel": "Lower",
       "amountUsd": "2.87588168",
@@ -119,5 +119,10 @@
       "instanceDate": "2026-03-17",
       "category": "daily"
     }
+  ],
+  "lastClaimed": [
+    "0xCD3a6A6dcf4502278D1375Fd333eAd1B641bc284",
+    "0x6D8647BCD760FEB971299E057DEFBcEC2009ec34",
+    "0x6E15fcAcaC9e867b2da168A0a9495744f6fEFB2d"
   ]
 }

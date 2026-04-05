@@ -1,5 +1,5 @@
 {
-  "updated": "2026-04-05T20:46:05.628Z",
+  "updated": "2026-04-05T20:51:05.813Z",
   "stats": {
     "totalPredictions": 10,
     "resolvedMarkets": 8,
@@ -7,7 +7,7 @@
     "unclaimedMarkets": 0,
     "unclaimedPayoutUsd": "0.00",
     "unclaimedPnlUsd": "0.00",
-    "leaderboardRank": 146,
+    "leaderboardRank": 147,
     "pnlUsd": -9.150504262789866,
     "pnlPercent": -23.582653192668822,
     "volumeUsd": 38.80184383,
